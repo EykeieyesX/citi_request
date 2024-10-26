@@ -306,7 +306,11 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
                                             <input type='hidden' name='user_email' value='" . htmlspecialchars($row['email']) . "'>
                                             <button type='submit' class='userdeletebtm'>Delete</button>
                                         </form>
-                                    </td>"; // Add a delete button
+                                        <form action='reset_password.php' method='POST' onsubmit='return confirm(\"Are you sure you want to reset this user's password?\");'>
+                                            <input type='hidden' name='user_email' value='" . htmlspecialchars($row['email']) . "'>
+                                            <button type='submit' class='userresetbtn'>Reset</button>
+                                        </form>
+                                    </td>"; 
                                 echo "</tr>";
                             }
                         } else {
