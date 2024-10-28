@@ -573,15 +573,15 @@ body.dark-mode {
 
 .dark-mode .main--content h2,
 .dark-mode .main--content h3 {
-    color: var(--color-primary); /* Ensure these are visible */
+    color: var(--color-primary);
 }
 
 .dark-mode .main--content p {
-    color: var(--color-secondary); /* Set appropriate color for dark mode */
+    color: var(--color-secondary); 
 }
 
 .dark-mode .card .material-symbols-outlined {
-    color: var(--color-text); /* Or another color that contrasts with the background */
+    color: var(--color-text);
 }
 
 /* Popup styling */
