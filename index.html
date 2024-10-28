@@ -69,12 +69,28 @@
                     <input type="password" name="password" required aria-label="Password">
                     <label>Password</label>
                 </div>
+                <div class="remember-forgot">
+                    <a href="#" onclick="openForgotPassword()">Forgot Password?</a>
+                </div>
 
                 <button type="submit" class="btn">Login</button>
                 <div class="login-register">
                     <label>Don't have an account? <a href="#" class="register-link">Register</a></label>
                 </div>
             </form>
+        </div>
+        <!-- Forgot Password Form -->
+        <div id="forgot-password-popup" class="popup" style="display: none;">
+            <div class="popup-content">
+                <span class="popup-close" onclick="closeForgotPassword()">&times;</span>
+                <h2>Forgot Password</h2>
+                <form id="forgot-password-form" action="forgot_password.php" method="post" onsubmit="return handleForgotPassword(event)">
+                    <label for="email">Enter your email address:</label>
+                    <input type="email" id="email" name="email" required>
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+                <p id="forgot-password-message"></p>
+            </div>
         </div>
         <div class="form-box register">
             <h2>Registration</h2>
@@ -113,6 +129,7 @@
                 </div>
             </form>
         </div>
+
     </div>
     <iframe src="chatbot.html" style="border: none; width: 85%; height: 600px; position: fixed; bottom: 10px; right: 10px; z-index: 99"></iframe>
     <!-- Footer -->
@@ -161,5 +178,6 @@
     <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="forgotpassword.js"></script>
 </body>
 </html>

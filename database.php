@@ -1,4 +1,7 @@
 <?php
-$con = mysqli_connect("localhost","root","","lgutestdb") or die(mysql_error());
+$conn = mysqli_connect("localhost", "root", "", "lgutestdb");
 
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 ?>
