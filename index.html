@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
-    <title>LGU User Dashboard</title>
+    <title>CRFMS Home</title>
 </head>
 <body>
     <div class="container">
@@ -14,7 +14,7 @@
         <aside id="sidebar">
             <div class="toggle">
                 <div class="logo">
-                    <a href="AdminLogin.html">
+                    <a href="admin/AdminLogin.html">
                         <img src="images/crfms.png" alt="LGU Logo"></a>
                 </div>
                 <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
@@ -58,7 +58,7 @@
         <span class="icon-close" onclick="closePopup()"><ion-icon name="close"></ion-icon></span>
         <div class="form-box login">
             <h2>Login</h2>
-            <form action="login.php" method="post">
+            <form action="user/php/login.php" method="post">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="person"></ion-icon></span>
                     <input type="text" name="username" required aria-label="Username">
@@ -84,7 +84,7 @@
             <div class="popup-content">
                 <span class="popup-close" onclick="closeForgotPassword()">&times;</span>
                 <h2>Forgot Password</h2>
-                <form id="forgot-password-form" action="forgot_password.php" method="post" onsubmit="return handleForgotPassword(event)">
+                <form id="forgot-password-form" action="user/forgot_password.php" method="post" onsubmit="return handleForgotPassword(event)">
                     <label for="email">Enter your email address:</label>
                     <input type="email" id="email" name="email" required>
                     <button type="submit" class="btn">Submit</button>
@@ -94,7 +94,7 @@
         </div>
         <div class="form-box register">
             <h2>Registration</h2>
-            <form action="register.php" method="post">
+            <form action="user/php/register.php" method="post">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="person"></ion-icon></span>
                     <input type="text" name="username" required aria-label="Username">
@@ -131,7 +131,7 @@
         </div>
 
     </div>
-    <iframe src="chatbot.html" style="border: none; width: 85%; height: 600px; position: fixed; bottom: 10px; right: 10px; z-index: 99"></iframe>
+    <iframe src="user/chatbot.html" style="border: none; width: 85%; height: 600px; position: fixed; bottom: 10px; right: 10px; z-index: 99"></iframe>
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -178,6 +178,6 @@
     <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="forgotpassword.js"></script>
+    <script src="user/forgotpassword.js"></script>
 </body>
 </html>

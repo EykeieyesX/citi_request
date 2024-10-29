@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Trigger register success popup based on URL parameter
-    if (urlParams.has('register_success')) {
+    if (urlParams.has('success')) {
         showRegisterSuccessPopup();
     }
 });

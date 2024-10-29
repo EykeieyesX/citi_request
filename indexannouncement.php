@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
-    <title>LGU User Dashboard</title>
+    <title>Announcements</title>
 </head>
 <body>
     <div class="container">
@@ -14,7 +14,7 @@
         <aside id="sidebar">
             <div class="toggle">
                 <div class="logo">
-                    <a href="AdminLogin.html">
+                    <a href="admin/AdminLogin.html">
                         <img src="images/crfms.png" alt="LGU Logo"></a>
                 </div>
                 <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">

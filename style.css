@@ -1573,3 +1573,45 @@ color: var(--color-text);
     background-color: #0056b3; 
 }
 
+/* search | reset btn*/
+.review--submission {
+    position: relative; 
+}
+
+.review--submission form {
+    display: flex; 
+    align-items: center; 
+    justify-content: start; 
+}
+
+.review--submission input[type="text"] {
+    flex: 1;
+    max-width: 50%; 
+    padding: 15px;
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    font-size: 16px; 
+    transition: border-color 0.3s ease; 
+}
+
+.review--submission input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none; 
+}
+
+.searchbtn, .resetbtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer; 
+    padding: 10px; 
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease; 
+}
+
+.searchbtn:hover, .resetbtn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.material-symbols-outlined {
+    font-size: 24px;
+}
