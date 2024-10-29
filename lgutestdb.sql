@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2024 at 11:48 AM
+-- Generation Time: Oct 29, 2024 at 05:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -41,7 +41,7 @@ CREATE TABLE `admincredentials` (
 --
 
 INSERT INTO `admincredentials` (`username`, `firstname`, `lastname`, `barangay`, `password`, `admin_code`) VALUES
-('water', 'stagnant', 'water', '123', '$2y$10$NiMnRBrupvyU/1O3lTpYMOJr2oZCYaYVLrQKV11Zh4RHTlfnvrBya', '');
+('water', 'stagnant', 'water', '123', '$2y$10$SVD.BieqENooGiEaGy33OOjGvfdgLtsfxbH5j5v1an0o.QrrBEdHG', '');
 
 -- --------------------------------------------------------
 
@@ -63,9 +63,9 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`announcementID`, `username`, `Topic`, `Description`, `Images`, `created_at`) VALUES
-(3, 'Sid', 'HEH', 'CAT', 'would.jpg', '2024-10-13 18:26:12'),
 (4, 'water', 'sonic', 'test long descriptiontest long descriptiontest long descriptiontest long descriptiontest long descriptiontest long descriptiontest long descriptiontest long descriptiontest long descriptiontest long descriptiontest long descriptiontest long descriptiontes', '427971999_225426603990729_8886241880373014013_n.jpg', '2024-10-13 18:39:08'),
-(5, 'water', 'lennon', 'x123', '464109284_560033689757211_8569353342527183854_n.jpg', '2024-10-26 22:50:27');
+(5, 'water', 'lennon', 'x123', '464109284_560033689757211_8569353342527183854_n.jpg', '2024-10-26 22:50:27'),
+(7, 'water', 'New Folder', 'Admin Folder upload check', 'nice.jpeg', '2024-10-29 22:22:31');
 
 -- --------------------------------------------------------
 
@@ -90,7 +90,8 @@ CREATE TABLE `feedback` (
 INSERT INTO `feedback` (`feedbackid`, `email`, `topic`, `description`, `location`, `images`, `submitted_date`) VALUES
 ('B482F7E', 'sid@gmail.com', 'Feedback', 'First feedback frfr', 'Franciscan Missionary Sisters of the Sacred Heart, #27, N. Reyes Street, Xavierville III, Loyola Heights, 3rd District, Quezon City, Eastern Manila District, Metro Manila, 1108, Philippines', 'lmfao.gif', '2024-10-13 18:22:16'),
 ('F4C5F1D', 'sid@gmail.com', 'Feedback', 'another feedback', 'H. R. Ocampo Street, Lambak 6-B, Krus na Ligas, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', 'drive.jpg', '2024-10-13 18:22:56'),
-('9B5E320', 'sid@gmail.com', 'Feedback', '1x2x123', '51-D, V. Manansala Street, Lambak 6-B, UP Campus, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', 'fightclub.jpg', '2024-10-28 18:35:33');
+('9B5E320', 'sid@gmail.com', 'Feedback', '1x2x123', '51-D, V. Manansala Street, Lambak 6-B, UP Campus, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', 'fightclub.jpg', '2024-10-28 18:35:33'),
+('9BC8905', 'realaccfrfr@gmail.com', 'Feedback', 'x3', 'Bagong Pag-asa, Diliman, 1st District, Quezon City, Eastern Manila District, Metro Manila, 1100, Philippines', 'sad.gif', '2024-10-29 23:50:40');
 
 -- --------------------------------------------------------
 
@@ -115,10 +116,9 @@ CREATE TABLE `request` (
 --
 
 INSERT INTO `request` (`email`, `topic`, `description`, `location`, `images`, `reference_id`, `submitted_date`, `last_updated`, `status`) VALUES
-('sid@gmail.com', 'General Inquiry', 'First gen in', 'Department of Human Settlements and Urban Development/Human Settlements Adjudication Commission, Kalayaan Avenue, Old Capitol Site, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', 'consequences.jpeg', 'REF-706BFA5', '2024-10-13 18:22:29', '2024-10-13 19:08:59', 'Completed'),
-('sid@gmail.com', 'Complaint', 'complaint', 'Mahabagin Street, Teachers Village, Teachers Village West, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', '11977144021448909699.gif', 'REF-B20CDB0', '2024-10-13 18:22:41', '2024-10-13 18:22:41', 'In-progress'),
-('sid@gmail.com', 'General Inquiry', 'sdadssdsd', 'East Avenue Sewage Treatment Plant, Quezon Avenue, Central, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1100, Philippines', '', 'REF-1F43B81', '2024-10-26 22:51:34', '2024-10-26 22:51:34', 'Submitted'),
-('sid@gmail.com', 'General Inquiry', '213123123', '9, Mahusay Street, UP Village, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', 'justdance.mp4', 'REF-EBE4E21', '2024-10-26 22:53:59', '2024-10-26 22:54:32', 'Cancelled');
+('sid@gmail.com', 'General Inquiry', 'Table cleared, Foldered up files', 'Mother of Divine Providence School, General Ordoñez Street, Marikina Heights, District II, Marikina, Eastern Manila District, Metro Manila, 1810, Philippines', 'ayo.gif', 'REF-99BB8F1', '2024-10-29 21:13:55', '2024-10-29 22:32:39', 'Submitted'),
+('realaccfrfr@gmail.com', 'General Inquiry', 'submitted frfr', 'Calumpit Street, Veterans Village, Project 7, 1st District, Quezon City, Eastern Manila District, Metro Manila, 1105, Philippines', 'woahthere.gif', 'REF-BDF29DE', '2024-10-29 22:33:21', '2024-10-29 22:33:21', 'Submitted'),
+('realaccfrfr@gmail.com', 'General Inquiry', 'x2', 'Guatemala Street, Pansol, 3rd District, Quezon City, Eastern Manila District, Metro Manila, 1806, Philippines', 'GEzEpreaIAACFxc.jpg', 'REF-25819C8', '2024-10-29 23:50:16', '2024-10-29 23:50:16', 'Submitted');
 
 -- --------------------------------------------------------
 
@@ -141,10 +141,9 @@ CREATE TABLE `usercredentials` (
 --
 
 INSERT INTO `usercredentials` (`username`, `firstname`, `lastname`, `email`, `password`, `reset_token`, `token_expiry`) VALUES
-('Sid', 'stagnant', 'water', 'sid@gmail.com', '$2y$10$ZDdYvrWV1Yuu3UtkXPhxhu8bo2/iwm.Kth298.jMLU81OM09G3w6C', NULL, NULL),
-('asd', 'asd', 'asd', 'water@gmail.com', '$2y$10$B74x1bK4ctFnFlIbWkx/2.St/.tMRAi6HOEhm4IfEgMn27LGyyJvS', NULL, NULL),
-('test', 'test', 'test', 'test@gmail.com', '$2y$10$fj/lDHxKL7Zmh40mPSk46eIusuQrjzbRCtePaoUQu0VfK1OWfivpG', NULL, NULL),
-('stagnant', 'Lee', 'Eojin', 'realaccfrfr@gmail.com', '$2y$10$9uB3bdaQOGwPFMBFJqFP0.9RVwnj8uhvtJUCYILwPiR8ZIVs1e6SS', NULL, NULL);
+('stagnant', 'Lee', 'Eojin', 'realaccfrfr@gmail.com', '$2y$10$Bl1zWSdm8tqVKLz.rbwbdu/spjx3y3.nPQQZP6XYg1Kw5XwZRLGXO', NULL, NULL),
+('zxsid', 'lee', 'eojin', 's1dcxzzxc@gmail.com', '$2y$10$E5WbDPTl7nFIciKBTR3jZulzOHp7D0boOF.nJZCgShm1m.JaCpPpS', NULL, NULL),
+('x123x1', '23x123', 'x123x', '123x12@gmail.com', '$2y$10$FQtiuBcagZ7U5vxyFcIjEuk8.jvXBUnLHW.NB5EYeEvu/Ta0O2DWO', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -164,7 +163,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `announcementID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `announcementID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
