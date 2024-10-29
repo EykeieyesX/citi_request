@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2024 at 05:13 PM
+-- Generation Time: Oct 29, 2024 at 11:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -41,12 +41,7 @@ CREATE TABLE `admincredentials` (
 --
 
 INSERT INTO `admincredentials` (`username`, `firstname`, `lastname`, `barangay`, `password`, `admin_code`) VALUES
-('Sid', 'ad', 'min', '1', '$2y$10$24e44tzZEdA839ITyB./o.UEAolMinv2Ydn336O8IAFCLM/jsJnJe', ''),
-('Stag', 'Bing', 'Bong', 'Bang', '$2y$10$iQSg7cl8jADsThnWm8rrju6MAR2U54S11wTCIPIs00Hw2/o6fxiH6', ''),
-('water', 'asd', 'asda', 'asd', '$2y$10$AN952tia4Ld4iyJKEiUZfe9QetfLlijXl4sByU7ltdx3BEd4SH2Qa', ''),
-('zxc', 'asd', 'asd', 'asd', '$2y$10$UOkVAnl0Cjzr79zdVTYxiuiNsUi/zt0l.9m09ri8kSypiEd3oHhzq', ''),
-('admintest', 'admin', 'admin', 'admin', '$2y$10$RSy/x/XgaslDXdWfA.s5EutZBJKy4wuYkxoPfZfiijGBfktfzZ2A6', ''),
-('admintestz', 'adasd', 'asdasd', 'asdasd', '$2y$10$/VjQ9knk8aSuEn7W5fQwveyjj4WY4KV7jI7/UX9OPo2WHsbcf1Pva', '');
+('water', 'stagnant', 'water', '123', '$2y$10$NiMnRBrupvyU/1O3lTpYMOJr2oZCYaYVLrQKV11Zh4RHTlfnvrBya', '');
 
 -- --------------------------------------------------------
 
@@ -94,7 +89,8 @@ CREATE TABLE `feedback` (
 
 INSERT INTO `feedback` (`feedbackid`, `email`, `topic`, `description`, `location`, `images`, `submitted_date`) VALUES
 ('B482F7E', 'sid@gmail.com', 'Feedback', 'First feedback frfr', 'Franciscan Missionary Sisters of the Sacred Heart, #27, N. Reyes Street, Xavierville III, Loyola Heights, 3rd District, Quezon City, Eastern Manila District, Metro Manila, 1108, Philippines', 'lmfao.gif', '2024-10-13 18:22:16'),
-('F4C5F1D', 'sid@gmail.com', 'Feedback', 'another feedback', 'H. R. Ocampo Street, Lambak 6-B, Krus na Ligas, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', 'drive.jpg', '2024-10-13 18:22:56');
+('F4C5F1D', 'sid@gmail.com', 'Feedback', 'another feedback', 'H. R. Ocampo Street, Lambak 6-B, Krus na Ligas, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', 'drive.jpg', '2024-10-13 18:22:56'),
+('9B5E320', 'sid@gmail.com', 'Feedback', '1x2x123', '51-D, V. Manansala Street, Lambak 6-B, UP Campus, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1101, Philippines', 'fightclub.jpg', '2024-10-28 18:35:33');
 
 -- --------------------------------------------------------
 
@@ -135,17 +131,20 @@ CREATE TABLE `usercredentials` (
   `firstname` varchar(20) NOT NULL,
   `lastname` varchar(20) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `reset_token` varchar(255) DEFAULT NULL,
+  `token_expiry` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `usercredentials`
 --
 
-INSERT INTO `usercredentials` (`username`, `firstname`, `lastname`, `email`, `password`) VALUES
-('Sid', 'stagnant', 'water', 'sid@gmail.com', '$2y$10$ZDdYvrWV1Yuu3UtkXPhxhu8bo2/iwm.Kth298.jMLU81OM09G3w6C'),
-('asd', 'asd', 'asd', 'water@gmail.com', '$2y$10$B74x1bK4ctFnFlIbWkx/2.St/.tMRAi6HOEhm4IfEgMn27LGyyJvS'),
-('test', 'test', 'test', 'test@gmail.com', '$2y$10$fj/lDHxKL7Zmh40mPSk46eIusuQrjzbRCtePaoUQu0VfK1OWfivpG');
+INSERT INTO `usercredentials` (`username`, `firstname`, `lastname`, `email`, `password`, `reset_token`, `token_expiry`) VALUES
+('Sid', 'stagnant', 'water', 'sid@gmail.com', '$2y$10$ZDdYvrWV1Yuu3UtkXPhxhu8bo2/iwm.Kth298.jMLU81OM09G3w6C', NULL, NULL),
+('asd', 'asd', 'asd', 'water@gmail.com', '$2y$10$B74x1bK4ctFnFlIbWkx/2.St/.tMRAi6HOEhm4IfEgMn27LGyyJvS', NULL, NULL),
+('test', 'test', 'test', 'test@gmail.com', '$2y$10$fj/lDHxKL7Zmh40mPSk46eIusuQrjzbRCtePaoUQu0VfK1OWfivpG', NULL, NULL),
+('stagnant', 'Lee', 'Eojin', 'realaccfrfr@gmail.com', '$2y$10$9uB3bdaQOGwPFMBFJqFP0.9RVwnj8uhvtJUCYILwPiR8ZIVs1e6SS', NULL, NULL);
 
 --
 -- Indexes for dumped tables
