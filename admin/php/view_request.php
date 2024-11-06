@@ -33,7 +33,7 @@ $current_status = $request['status'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_status = $_POST['status'];
-    $admin_message = $_POST['admin_message'];  // Get the message from the form
+    $admin_message = $_POST['admin_message'];  
 
     // Prepare the SQL update statement to update both status and message
     $sql_update = "UPDATE Request SET status = ?, adminmessage = ?, last_updated = NOW() WHERE reference_id = ?";
@@ -170,30 +170,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <div class="backtoreview">
-    <a href="../reviewsubmissions.php">Back to Review Submissions</a>
-</div>
-
-<!-- Modal for Zoomed Image -->
-<div id="myModal" class="modal" style="display:none;">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage" alt="Zoomed Image">
+    <a href="../Reviewsubmissions.php">Back to Review Submissions</a>
 </div>
 
 <script>
+    // Function to open the image in a modal
     function openModal(src) {
-        document.getElementById('modalImage').src = src;
-        document.getElementById('myModal').style.display = "flex";
-    }
+        var modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        modal.style.display = 'flex';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.zIndex = '9999';
 
-    function closeModal() {
-        document.getElementById('myModal').style.display = "none";
-    }
+        var img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '90%';
+        img.style.maxHeight = '90%';
+        img.style.border = '5px solid white';
+        
+        modal.appendChild(img);
 
-    // Close the modal when clicking outside of the image
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('myModal')) {
-            closeModal();
-        }
+        modal.onclick = function() {
+            document.body.removeChild(modal);
+        };
+
+        document.body.appendChild(modal);
     }
 </script>
 

@@ -91,11 +91,60 @@ if (!$request) {
             </tr>
             <?php endif; ?>
         </table>
+
+        <!-- Display Images if available -->
+        <div class="images-container">
+            <h3>Attached Images</h3>
+            <div class="image-gallery">
+                <?php if (!empty($request['images']) && $request['images'] !== 'NULL'): ?>
+                    <?php $images = explode(',', $request['images']); ?>
+                    <?php foreach ($images as $image): ?>
+                        <img src="../../uploads/<?php echo htmlspecialchars($image); ?>" class="request-image" style="width:100px; margin-right: 5px; cursor: pointer;" alt="Attached Image" onclick="openModal(this.src)">
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No image attached.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+
     </div>
 </div>
+
 <div class="backtotrack">
-            <a href="../track.php">Back to Track Requests</a>
+    <a href="../track.php">Back to Track Requests</a>
 </div>
+
+<script>
+    // Function to open the image in a modal
+    function openModal(src) {
+        var modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        modal.style.display = 'flex';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.zIndex = '9999';
+
+        var img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '90%';
+        img.style.maxHeight = '90%';
+        img.style.border = '5px solid white';
+        
+        modal.appendChild(img);
+
+        modal.onclick = function() {
+            document.body.removeChild(modal);
+        };
+
+        document.body.appendChild(modal);
+    }
+</script>
+
 </body>
 </html>
 
