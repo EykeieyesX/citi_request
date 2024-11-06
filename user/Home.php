@@ -32,17 +32,6 @@ if ($conn->connect_error) {
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <img src="../images/crfms.png">
-                </div>
-                <div class="close" id="toggle-btn">
-                    <span class="material-icons-sharp">
-                        menu_open
-                    </span>
-                </div>
-            </div>
-            
             <div class="sidebar">
                 <a href="Home.php" class="active">
                     <span class="material-icons-sharp">
@@ -93,22 +82,33 @@ if ($conn->connect_error) {
         <iframe src="chatbot.html" style="border: none; width: 70%; height: 600px; position: fixed; bottom: 10px; right: 10px; z-index: 1000"></iframe>
         <!--Main content per page-->
         <div class="main--content">
-            <h2>Home</h2>
+            <h1>FAQ Chatbot</h1>
             
         </div>
-        <nav class="navigation">
+    <nav class="navigation">
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+            </div>
+        </div>
         <div class="user-info">
                 <span>Welcome, <?php echo htmlspecialchars($username); ?></span>
         </div>
-            <button id="theme-toggle" class="btn-theme-toggle">
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
-
-            <button class="btnLogin-popup"><a href="php/logout.php">Logout</button>
-        </nav>
-
+            <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+        </div>
+    </nav>    
     </div>
 
     <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
 </body>
 </html>

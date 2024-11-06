@@ -24,16 +24,7 @@ $email = $_SESSION['email'];
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <img src="../images/crfms.png">
-                </div>
-                <div class="close" id="toggle-btn">
-                    <span class="material-icons-sharp">menu_open</span>
-                </div>
-            </div>
-
-            <div class="sidebar">
+          <div class="sidebar">
                 <a href="Home.php">
                     <span class="material-icons-sharp">home</span>
                     <h3>Home</h3>
@@ -102,17 +93,29 @@ $email = $_SESSION['email'];
         </div>
 
         <nav class="navigation">
-            <button id="theme-toggle" class="btn-theme-toggle">
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
             <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
-        </nav>
+        </div>
+    </nav>    
     </div>
 
     <script src="../script.js"></script>  
     <script src="submit.js"></script> 
     <script src="maps.js"></script> 
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-
+    <script src="../sidebar.js"></script>
 </body>
 </html>

@@ -12,16 +12,6 @@
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <a href="admin/AdminLogin.html">
-                        <img src="images/crfms.png" alt="LGU Logo"></a>
-                </div>
-                <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
-                    <span class="material-icons-sharp">menu_open</span>
-                </div>
-            </div>
-
             <div class="sidebar">
                 <a href="index.html">
                     <span class="material-symbols-outlined">favorite</span>                   
@@ -89,15 +79,27 @@
         </div>
         
         <!-- Light/Dark Mode Toggle Button -->
-        <nav class="navigation">
+          <!-- Navigation bar-->
+    <nav class="navigation">
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                <a href="admin/AdminLogin.html">
+                    <img src="images/crfms.png" alt="LGU Logo">
+                </a>
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
             <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
-
-            <!-- Signup Button -->
-
             <button class="btnLogin-popup" aria-label="Sign Up">Sign Up</button>
-        </nav>
+        </div>
+    </nav>
     </div>
     
     <!-- Signup Form --> 
@@ -161,17 +163,6 @@
             </form>
         </div>
     </div>
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 LGU User Dashboard. All rights reserved.</p>
-            <ul class="footer-links">
-                <li><a href="Privacy.html" rel="noopener noreferrer">Privacy Policy</a></li>
-                <li><a href="Terms.html" rel="noopener noreferrer">Terms of Service</a></li>
-            </ul>
-        </div>
-    </footer>
-
     <!-- Popups -->
     <div id="username-error-popup" class="popup" style="display:none;">
         <div class="popup-content">
@@ -207,5 +198,8 @@
     <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="user/forgotpassword.js"></script>
+    <script src="sidebar.js"></script>
+
 </body>
 </html>

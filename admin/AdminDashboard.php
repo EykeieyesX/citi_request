@@ -116,15 +116,6 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <img src="../images/crfms.png">
-                </div>
-                <div class="close" id="toggle-btn">
-                    <span class="material-icons-sharp">menu_open</span>
-                </div>
-            </div>
-
             <div class="sidebar">
                 <a href="AdminDashboard.php" class="active">
                     <span class="material-symbols-outlined">dashboard</span>
@@ -376,19 +367,29 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
 
         </div>
         <!-- End of Main content -->
-        <nav class="navigation">
-            <div class="user-info">
-                <span>Welcome, <?php echo htmlspecialchars($username); ?></span>
+    <nav class="navigation">
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
             </div>
-
-            <button id="theme-toggle" class="btn-theme-toggle">
-                <span class="material-symbols-outlined">light_mode
+            <div class="logo">
+                <a href="admindashboard.php">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+                </a>
+            </div>
+        </div>
+        <div class="user-info">
+                <span>Welcome, <?php echo htmlspecialchars($username); ?></span>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                 <span class="material-symbols-outlined">light_mode</span>
-                Toggle Theme
             </button>
             <button class="btnLogin-popup"><a href="php/admin_logout.php">Logout</a></button>
-        </nav>
-    </div>
+        </div>
+    </nav>
                 <!-- user delete popups-->
     <div id="user-deleted-popup" class="popup" style="display:none;">
         <div class="popup-content">
@@ -405,6 +406,7 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
 </body>
 </html>
 

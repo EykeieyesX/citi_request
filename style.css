@@ -96,77 +96,34 @@ b {
     position: relative;
 }
 
-/* Sidebar styles */
+/* Sidebar and Layout */
 aside {
     height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
     transition: all 0.3s ease;
-    position: sticky;  /* Makes the sidebar stick to the screen */
-    top: 0;  /* Ensure it sticks at the top of the viewport */
+    z-index: 9;
 }
 
-aside.minimized {
-    width: 4rem; 
+aside.active {
+    left: 0;
 }
 
-aside.minimized  h2, 
-aside.minimized .sidebar h3 {
-    display: none; 
+.navigation.active {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
 }
-aside.minimized .logo img {
-    width: 50px; /* Smaller size when sidebar is minimized */
-    height: auto;
-    object-fit: contain;
-}
-
-aside.minimized .sidebar a {
-    margin-left: 0; 
-    justify-content: center; 
-    padding-left: 0;
-}
-
-aside.minimized .sidebar a span {
-    font-size: 2rem; 
-}
-
-aside .toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1.4rem;
-}
-
-aside .toggle .logo {
-    display: flex;
-    gap: 0.5rem;
-}
-
-aside .logo img {
-    width: 10rem; 
-    height: auto; 
-    object-fit: contain;
-}
-aside.toggle .logo img {
-    width: 100px;
-    height: auto;
-    object-fit: contain;
-}
-
-aside .toggle .close {
-    cursor: pointer; 
-    color: var(--color-text);
-}
-
 
 aside .sidebar {
     display: flex;
-    width: 100%;
     flex-direction: column;
     background-color: var(--color-background);
     box-shadow: var(--box-shadow);
     border-radius: 10px;
     height: 88vh;
-    transition: all 0.3s ease;
-    /* Removed position relative and top, since position sticky handles this */
+    padding-top: 20px;
 }
 
 aside .sidebar a {
@@ -214,7 +171,30 @@ aside .sidebar a:hover span {
 }
 
 
+aside.minimized {
+    width: 4rem;
+}
 
+aside.minimized h2,
+aside.minimized .sidebar h3 {
+    display: none;
+}
+
+aside.minimized .logo img {
+    width: 50px;
+    height: auto;
+    object-fit: contain;
+}
+
+aside.minimized .sidebar a {
+    margin-left: 0;
+    justify-content: center;
+    padding-left: 0;
+}
+
+aside.minimized .sidebar a span {
+    font-size: 2rem;
+}
 /* Footer */
 
 footer {
@@ -459,17 +439,53 @@ footer {
 }
 
 
-
-
-/* Navigation */
 .navigation {
-    position: absolute;
-    top: 25px;
-    right: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between; /* Space between left and right sections */
+    align-items: center;
+    font-size: 18px;
+    background-color: var(--color-background-lighter);
+    box-shadow: #080917;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+/* Left section: Close button and Logo */
+.navigation .left-section {
     display: flex;
     align-items: center;
-    gap: 16px; 
-    font-size: 18px;
+    justify-content: flex-start; /* Ensures the left section is aligned to the left */
+}
+
+.navigation .close {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+/* Logo next to Close button */
+.navigation .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 16px; /* Space between the close button and the logo */
+}
+
+.navigation .logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* Right section: Theme toggle and Sign-up button */
+.navigation .right-section {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Space between theme toggle and sign-up button */
 }
 
 .navigation .btn-theme-toggle {
@@ -509,7 +525,6 @@ footer {
     background: var(--color-dark-variant);
     color: #141db8;
 }
-
 /* Modes */
 
 .btn-theme-toggle {
@@ -582,6 +597,10 @@ body.dark-mode {
 
 .dark-mode .card .material-symbols-outlined {
     color: var(--color-text);
+}
+
+.dark-mode .navigation{
+    background-color: var(--color-dark);
 }
 
 /* Popup styling */
@@ -749,12 +768,28 @@ body.dark-mode {
     justify-content: space-between;
 }
 
-/* dashboard */
 .main--content {
-    position: grid;
+    margin-left: 220px;
+    margin-top: 70px;
+    padding: 1rem; 
+    position: relative; 
     background: var(--color-background);
-    width: 100%;
+    width: calc(100% - 220px);
+}
+.main--content {
+    margin-left: 0; /* Initially, no margin */
+    margin-top: 70px;
     padding: 1rem;
+    position: relative;
+    background: var(--color-background);
+    width: 100%; /* Initially takes up full width */
+    transition: all 0.3s ease; /* Smooth transition for when sidebar toggles */
+}
+
+/* When the sidebar is active (opened), push the content to the right */
+aside.active + .main--content {
+    margin-left: 220px; /* Push content over */
+    width: calc(100% - 220px); /* Reduce content width */
 }
 
 /* Header wrapper */
@@ -1354,38 +1389,6 @@ color: var(--color-text);
     margin-right: 3rem;
 }
 
-  /* Modal Styles */
-.modal {
-    display: none; /* Ensure the modal is hidden initially */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    display: flex; /* Use flexbox for centering */
-}
-
-.modal-content {
-    max-width: 90%; /* Make sure it doesn't overflow */
-    max-height: 90%; /* Make sure it doesn't overflow */
-}
-
-.close {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-
 .contact-info h2, .about-container h1, .about-content h2 {
       color: var(--color-header);
 }
@@ -1615,3 +1618,4 @@ color: var(--color-text);
 .material-symbols-outlined {
     font-size: 24px;
 }
+

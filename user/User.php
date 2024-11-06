@@ -56,16 +56,7 @@ $conn->close();
 <div class="container">
     <!-- Side bar-->
     <aside id="sidebar">
-        <div class="toggle">
-            <div class="logo">
-                <img src="../images/crfms.png" alt="Logo">
-            </div>
-            <div class="close" id="toggle-btn">
-                <span class="material-icons-sharp">menu_open</span>
-            </div>
-        </div>
-
-        <div class="sidebar">
+     <div class="sidebar">
             <a href="Home.php">
                 <span class="material-icons-sharp">home</span>
                 <h3>Home</h3>
@@ -153,13 +144,26 @@ $conn->close();
             </div>
         </form>
         </div>
-
+    
     <nav class="navigation">
-        <button id="theme-toggle" class="btn-theme-toggle">
-            <span class="material-symbols-outlined">light_mode</span>
-        </button>
-        <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
-    </nav>
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                <span class="material-symbols-outlined">light_mode</span>
+            </button>
+            <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+        </div>
+    </nav>    
+    
 
     <!-- Incorrect Password Popup -->
     <div class="passwordpopup" id="passwordpopup" style="display: <?php echo !empty($errorMessage) ? 'block' : 'none'; ?>;">
@@ -195,5 +199,6 @@ function togglePasswordVisibility(fieldId, btn) {
 }
 </script>
 <script src="../script.js"></script>
+<script src="../sidebar.js"></script>
 </body>
 </html>

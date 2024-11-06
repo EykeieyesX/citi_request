@@ -12,16 +12,6 @@
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <a href="admin/AdminLogin.html">
-                    <img src="../images/crfms.png"></a>
-                </div>
-                <div class="close" id="toggle-btn">
-                    <span class="material-icons-sharp">menu_open</span>
-                </div>
-            </div>
-
             <div class="sidebar">
                 <a href="../index.html" class="active">
                     <span class="material-symbols-outlined">
@@ -38,14 +28,26 @@
             <h1>Admin Panel</h1>
         </div>
 
-        <!-- Light/Dark Mode Toggle Button -->
+        <!-- Navigation -->
         <nav class="navigation">
-            <button id="theme-toggle" class="btn-theme-toggle">
-                <span class="material-symbols-outlined">light_mode</span>
-            </button>
-
-            <!-- Admin Signup Button -->
-            <button class="btnLogin-popup">Sign Up</button>
+            <!-- Left section: Close button and Logo -->
+            <div class="left-section">
+                <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                    <span class="material-icons-sharp">menu_open</span>
+                </div>
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/crfms.png" alt="LGU Logo">
+                    </a>
+                </div>
+            </div>
+            <!-- Right section: Theme toggle and Sign up button -->
+            <div class="right-section">
+                <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                    <span class="material-symbols-outlined">light_mode</span>
+                </button>
+                <button class="btnLogin-popup" aria-label="Sign Up">Sign Up</button>
+            </div>
         </nav>
     </div>
 
@@ -151,6 +153,7 @@
     </div>
 
     <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
