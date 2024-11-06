@@ -111,10 +111,6 @@ aside.active {
     left: 0;
 }
 
-.navigation.active {
-    margin-left: 250px;
-    transition: margin-left 0.3s ease;
-}
 
 aside .sidebar {
     display: flex;
@@ -440,7 +436,7 @@ footer {
 
 
 .navigation {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -786,11 +782,6 @@ body.dark-mode {
     transition: all 0.3s ease; /* Smooth transition for when sidebar toggles */
 }
 
-/* When the sidebar is active (opened), push the content to the right */
-aside.active + .main--content {
-    margin-left: 220px; /* Push content over */
-    width: calc(100% - 220px); /* Reduce content width */
-}
 
 /* Header wrapper */
 .header--wrapper {
@@ -1656,4 +1647,90 @@ color: var(--color-text);
     font-size: 14px;
     margin-top: 10px;
     text-align: center; /* Center text inside the text area */
+}
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    /* Ensure that the container has a column layout for mobile */
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+
+    /* Sidebar positioning for mobile */
+    #sidebar {
+        width: 100%; /* Make the sidebar full width in mobile */
+        position: fixed;
+        top: 60px; /* Sidebar starts below the navigation bar */
+        left: 0;
+        padding: 10px;
+        display: none;
+        z-index: 900;
+        background-color: rgba(0, 0, 0, 0.8); /* Optional: Add a transparent background */
+        height: 100%; /* Make the sidebar full height */
+        overflow-y: auto; /* Allow scrolling inside the sidebar */
+    }
+
+    /* When sidebar is active, it will display */
+    #sidebar.active {
+        display: block;
+    }
+
+    .main--content {
+        padding-top: 60px; 
+        display: block; 
+    }
+
+    /* Navigation Bar stays fixed at the top */
+    .navigation.active {
+        margin-left: 0; /* Do not push the navigation bar */
+    }
+
+    aside.active + .main--content {
+        margin-left: 0; /* Do not push the main content */
+        width: 100%; /* Full width for content */
+    }
+
+    .left-section {
+        flex: 1;
+    }
+
+    .logo img {
+        height: 30px;
+    }
+
+    .right-section {
+        display: none;
+    }
+
+    #toggle-btn {
+        display: block;
+        cursor: pointer;
+    }
+
+    /* Sidebar toggle button icon */
+    #toggle-btn span {
+        font-size: 30px;
+        color: white;
+    }
+
+    /* Sidebar overlay for mobile */
+    #sidebar.active {
+        display: block;
+        top: 60px; /* Sidebar starts directly under the navbar */
+        z-index: 900;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .navigation.active {
+        margin-left: 250px;
+        transition: margin-left 0.3s ease;
+    }
+
+    /* When the sidebar is active (opened), push the content to the right */
+    aside.active + .main--content {
+        margin-left: 220px; /* Push content over */
+        width: calc(100% - 220px); /* Reduce content width */
+    }
 }
