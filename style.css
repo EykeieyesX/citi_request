@@ -1364,6 +1364,21 @@ color: var(--color-text);
     background-color: var(--color-secondary);
   }
 
+.backtotrack a {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .backtotrack a:hover {
+    background-color: var(--color-secondary);
+  }
   
   .updaterequeststatus button {
     background-color: var(--color-primary);
@@ -1619,3 +1634,26 @@ color: var(--color-text);
     font-size: 24px;
 }
 
+.admin-message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.admin-message-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#admin_message {
+    width: 80%;
+    max-width: 600px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center; /* Center text inside the text area */
+}

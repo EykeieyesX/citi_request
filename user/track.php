@@ -97,7 +97,12 @@ $result = $result_array;
                 <tbody>
                     <?php foreach ($result as $row): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['reference_id']); ?></td>
+                        <td>
+                            <!-- Link to user_view_request.php with reference_id as a query parameter -->
+                            <a href="php/user_view_request.php?reference_id=<?php echo urlencode($row['reference_id']); ?>">
+                                <?php echo htmlspecialchars($row['reference_id']); ?>
+                            </a>
+                        </td>
                         <td>
                             <div class="status-container">
                                 <span class="status <?php echo isset($row['status_class']) ? $row['status_class'] : ''; ?>">
