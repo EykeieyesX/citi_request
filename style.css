@@ -1734,3 +1734,25 @@ color: var(--color-text);
         width: calc(100% - 220px); /* Reduce content width */
     }
 }
+/* Responsive Table Styling for Mobile */
+@media screen and (max-width: 768px) {
+    .user-list-section {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%; 
+    }
+
+    .user-list-section table {
+        width: 100%; 
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .user-list-section th, .user-list-section td {
+        padding: 8px;
+        white-space: nowrap; 
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

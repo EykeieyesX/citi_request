@@ -127,7 +127,9 @@ $conn->close();
 
             <div class="profile-section password-container">
                 <label for="new_password">New Password:</label>
-                <input type="password" id="new_password" name="new_password">
+                <input type="password" id="new_password" name="new_password"
+                    pattern="(?=.*\d).{8,}"
+                    title="Password must be at least 8 characters long and include at least 1 number">
                 <button type="button" class="btn-show" onclick="togglePasswordVisibility('new_password')">Show</button>
             </div>
 
