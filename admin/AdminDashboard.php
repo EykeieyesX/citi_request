@@ -388,6 +388,10 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
         <!-- Right section: Theme toggle and Sign up button -->
         <div class="right-section">
             <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
             <button class="btnLogin-popup"><a href="php/admin_logout.php">Logout</a></button>
@@ -410,6 +414,7 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
     <script src="../sidebar.js"></script>
 </body>
 </html>

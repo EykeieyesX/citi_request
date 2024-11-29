@@ -34,21 +34,26 @@ if (!$request) {
 
 // List of all valid statuses
 $all_statuses = ['Submitted', 'Reviewed', 'In-Progress', 'Completed', 'Cancelled'];
+$all_statuses = ['Submitted', 'Reviewed', 'In-Progress', 'Completed', 'Cancelled'];
 $current_status = $request['status'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_status = $_POST['status'];
+    $admin_message = $_POST['admin_message'];  
     $admin_message = $_POST['admin_message'];  
 
     // Prepare the SQL update statement to update both status and message
     $sql_update = "UPDATE request SET status = ?, adminmessage = ?, last_updated = NOW() WHERE reference_id = ?";
     $stmt_update = $conn->prepare($sql_update);
     $stmt_update->bind_param("sss", $new_status, $admin_message, $reference_id);
+    $stmt_update->bind_param("sss", $new_status, $admin_message, $reference_id);
 
     if ($stmt_update->execute()) {
         echo "Status and message updated successfully!";
+        echo "Status and message updated successfully!";
         header("Refresh:0");
     } else {
+        echo "Error updating status and message: " . $conn->error;
         echo "Error updating status and message: " . $conn->error;
     }
 }
@@ -187,6 +192,7 @@ $request_images_json = json_encode($request_images);
 
         <div class="statuschange">
             <h3>Update Status and Leave a Message</h3>
+            <h3>Update Status and Leave a Message</h3>
             <div class="view-updatestatus">
                 <form method="POST" action="">
                     <label for="status">Status:</label>
@@ -196,6 +202,12 @@ $request_images_json = json_encode($request_images);
                             <option value="<?php echo $status; ?>" <?php if ($status === $current_status) echo 'selected'; ?>><?php echo $status; ?></option>
                         <?php endforeach; ?>
                     </select>
+
+                    <div class="admin-message-container">
+                        <label for="admin_message">Admin Message:</label>
+                        <textarea name="admin_message" id="admin_message" rows="4" placeholder="Enter your message here..."><?php echo htmlspecialchars($request['adminmessage']); ?></textarea>
+                    </div>
+
 
                     <div class="admin-message-container">
                         <label for="admin_message">Admin Message:</label>

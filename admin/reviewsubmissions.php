@@ -126,7 +126,30 @@ $result_feedbacks = $conn->query($sql_feedbacks);
                 <span class="material-symbols-outlined">restart_alt</span>
             </button>
         </form>
+        <form method="GET" action="">
+            <input type="text" name="request_search" placeholder="Search by Reference ID, Email, Topic, or Status" value="<?php echo isset($_GET['request_search']) ? htmlspecialchars($_GET['request_search']) : ''; ?>">
+            <button class="searchbtn" type="submit">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+            <button class="resetbtn" type="reset" onclick="window.location.href='?';">
+                <span class="material-symbols-outlined">restart_alt</span>
+            </button>
+        </form>
 
+        <table>
+            <thead>
+                <tr>
+                    <th>Reference ID</th>
+                    <th>Email</th>
+                    <th>Topic</th>
+                    <th>Status</th>
+                    <th>Submitted Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Get the search query from the request form
+                $requestSearchQuery = isset($_GET['request_search']) ? $_GET['request_search'] : '';
         <table>
             <thead>
                 <tr>
@@ -149,7 +172,19 @@ $result_feedbacks = $conn->query($sql_feedbacks);
                                 topic LIKE ? OR 
                                 status LIKE ?";
                 $stmt = $conn->prepare($sql_requests);
+                // Create a prepared statement for the search
+                $sql_requests = "SELECT reference_id, email, topic, status, submitted_date FROM request WHERE 
+                                reference_id LIKE ? OR 
+                                email LIKE ? OR 
+                                topic LIKE ? OR 
+                                status LIKE ?";
+                $stmt = $conn->prepare($sql_requests);
 
+                // Prepare search parameters
+                $searchParam = "%" . $requestSearchQuery . "%";
+                $stmt->bind_param("ssss", $searchParam, $searchParam, $searchParam, $searchParam);
+                $stmt->execute();
+                $result_requests = $stmt->get_result();
                 // Prepare search parameters
                 $searchParam = "%" . $requestSearchQuery . "%";
                 $stmt->bind_param("ssss", $searchParam, $searchParam, $searchParam, $searchParam);
@@ -172,6 +207,12 @@ $result_feedbacks = $conn->query($sql_feedbacks);
                     echo "<tr><td colspan='5'>No requests found.</td></tr>";
                 }
 
+                // Close the statement
+                $stmt->close();
+                ?>
+            </tbody>
+        </table>
+    </div>
                 // Close the statement
                 $stmt->close();
                 ?>
@@ -260,6 +301,7 @@ $result_feedbacks = $conn->query($sql_feedbacks);
         </div>
     </nav>
 <script src="../script.js"></script>
+<script src="../sidebar.js"></script>
 <script src="../sidebar.js"></script>
 </body>
 </html>

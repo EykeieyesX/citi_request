@@ -137,6 +137,9 @@ $conn->close();
                 <input type="password" id="new_password" name="new_password" 
                     pattern="(?=.*\d).{8,}" 
                     title="Password must be at least 8 characters long and include at least 1 number">
+                <input type="password" id="new_password" name="new_password" 
+                    pattern="(?=.*\d).{8,}" 
+                    title="Password must be at least 8 characters long and include at least 1 number">
                 <button type="button" class="btn-show" onclick="togglePasswordVisibility('new_password')">Show</button>
             </div>
 
@@ -147,7 +150,7 @@ $conn->close();
             </div>
         </form>
         </div>
-
+    
     <nav class="navigation">
             <!-- Left section: Close button and Logo -->
             <div class="left-section">

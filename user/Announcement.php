@@ -149,5 +149,6 @@ if ($conn->connect_error) {
 
     <script src="../script.js"></script>
     <script src="../sidebar.js"></script>
+    <script src="../sidebar.js"></script>
 </body>
 </html>

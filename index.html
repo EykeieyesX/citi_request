@@ -52,6 +52,8 @@
             <button class="btnLogin-popup" aria-label="Sign Up">Sign Up</button>
         </div>
     </nav>
+        </div>
+    </nav>
     </div>
     
     <!-- Signup Form --> 
@@ -96,6 +98,7 @@
         <div class="form-box register">
             <h2>Registration</h2>
             <form action="user/php/register.php" method="post" id="registrationForm">
+            <form action="user/php/register.php" method="post" id="registrationForm">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="person"></ion-icon></span>
                     <input type="text" name="username" required aria-label="Username">
@@ -118,6 +121,9 @@
                 </div>
                 <div class="input-box">
                     <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="password" id="password" pattern="(?=.*\d).{8,}" 
+                           title="Password must be at least 8 characters long and include at least 1 number" 
+                           required aria-label="Password">
                     <input type="password" name="password" id="password" pattern="(?=.*\d).{8,}" 
                            title="Password must be at least 8 characters long and include at least 1 number" 
                            required aria-label="Password">

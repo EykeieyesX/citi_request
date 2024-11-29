@@ -92,6 +92,8 @@
             <button class="btnLogin-popup" aria-label="Sign Up">Sign Up</button>
         </div>
     </nav>
+        </div>
+    </nav>
     </div>
     
     <!-- Signup Form --> 

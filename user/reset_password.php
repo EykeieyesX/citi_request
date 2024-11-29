@@ -25,16 +25,27 @@ if ($result->num_rows > 0) {
               <body>
                   <div class="update-password-container">
                       <form method="POST" action="php/update_password.php" id="resetPasswordForm">
+                      <form method="POST" action="php/update_password.php" id="resetPasswordForm">
                           <input type="hidden" name="token" value="' . htmlspecialchars($token) . '">
+                          <label for="new_password">New Password:</label>
                           <label for="new_password">New Password:</label>
                           <div class="input-box">
                               <input type="password" name="new_password" id="new_password" 
                                      pattern="(?=.*\d).{8,}" 
                                      title="Password must be at least 8 characters long and include at least 1 number" 
                                      required>
+                              <input type="password" name="new_password" id="new_password" 
+                                     pattern="(?=.*\d).{8,}" 
+                                     title="Password must be at least 8 characters long and include at least 1 number" 
+                                     required>
                           </div>
                           <label for="confirm_password">Confirm Password:</label>
+                          <label for="confirm_password">Confirm Password:</label>
                           <div class="input-box">
+                              <input type="password" name="confirm_password" id="confirm_password" 
+                                     pattern="(?=.*\d).{8,}" 
+                                     title="Password must be at least 8 characters long and include at least 1 number" 
+                                     required>
                               <input type="password" name="confirm_password" id="confirm_password" 
                                      pattern="(?=.*\d).{8,}" 
                                      title="Password must be at least 8 characters long and include at least 1 number" 
@@ -43,6 +54,17 @@ if ($result->num_rows > 0) {
                           <input type="submit" value="Reset Password">
                       </form>
                   </div>
+                  <script>
+                      document.getElementById("resetPasswordForm").addEventListener("submit", function(event) {
+                          const newPassword = document.getElementById("new_password").value;
+                          const confirmPassword = document.getElementById("confirm_password").value;
+
+                          if (newPassword !== confirmPassword) {
+                              alert("Passwords do not match. Please try again.");
+                              event.preventDefault(); // Prevent form submission if passwords do not match
+                          }
+                      });
+                  </script>
                   <script>
                       document.getElementById("resetPasswordForm").addEventListener("submit", function(event) {
                           const newPassword = document.getElementById("new_password").value;
