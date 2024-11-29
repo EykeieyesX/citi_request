@@ -10,8 +10,8 @@ if (!isset($_SESSION['username'])) {
 
 // Database connection details
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "root"; 
+$password = ""; 
 $dbname = "lgutestdb";
 
 // Create connection

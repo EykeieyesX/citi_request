@@ -34,7 +34,7 @@ if ($result->num_rows > 0) {
     $lastname = htmlspecialchars($row['lastname']);
     $barangay = htmlspecialchars($row['barangay']);
 } else {
-    header("Location: adminlogin.html");
+    header("Location: AdminLogin.html");
     exit();
 }
 
@@ -58,6 +58,7 @@ $conn->close();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>Admin Profile Edit</title>
 </head>
 <body>
@@ -65,21 +66,12 @@ $conn->close();
 <div class="container">
     <!-- Side bar -->
     <aside id="sidebar">
-        <div class="toggle">
-            <div class="logo">
-                <img src="../images/crfms.png" alt="Logo">
-            </div>
-            <div class="close" id="toggle-btn">
-                <span class="material-icons-sharp">menu_open</span>
-            </div>
-        </div>
-
-        <div class="sidebar">
+      <div class="sidebar">
             <a href="AdminDashboard.php">
                 <span class="material-symbols-outlined">dashboard</span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="admin.php" class="active">
+            <a href="Admin.php" class="active">
                 <span class="material-symbols-outlined">shield_person</span>
                 <h3>Admin</h3>
             </a>
@@ -87,7 +79,7 @@ $conn->close();
                 <span class="material-symbols-outlined">add_box</span>
                 <h3>Announcements</h3>
             </a>
-            <a href="ReviewSubmissions.html">
+            <a href="Reviewsubmissions.php">
                 <span class="material-symbols-outlined">rate_review</span>
                 <h3>Review Request & Feedback</h3>
             </a>
@@ -136,7 +128,9 @@ $conn->close();
 
             <div class="profile-section password-container">
                 <label for="new_password">New Password:</label>
-                <input type="password" id="new_password" name="new_password">
+                <input type="password" id="new_password" name="new_password"
+                    pattern="(?=.*\d).{8,}"
+                    title="Password must be at least 8 characters long and include at least 1 number">
                 <button type="button" class="btn-show" onclick="togglePasswordVisibility('new_password')">Show</button>
             </div>
 
@@ -164,12 +158,25 @@ $conn->close();
         </div>
     </div>
     
-    
     <nav class="navigation">
-        <button id="theme-toggle" class="btn-theme-toggle">
-            <span class="material-symbols-outlined">light_mode</span>
-        </button>
-        <button class="btnLogin-popup"><a href="php/admin_logout.php">Logout</a></button>
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                <a href="AdminDashboard.php">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+                </a>
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                <span class="material-symbols-outlined">light_mode</span>
+            </button>
+            <button class="btnLogin-popup"><a href="php/admin_logout.php">Logout</a></button>
+        </div>
     </nav>
 </div>
 
@@ -186,6 +193,8 @@ function togglePasswordVisibility(fieldId, btn) {
     }
 }
 </script>
+<script src="../sidebar.js"></script>
 <script src="../script.js"></script>
+<script src="../password.js"></script>
 </body>
 </html>

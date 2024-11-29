@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['email'])) {
-    header("Location: login.php");
+    header("Location: ../index.html");
     exit();
 }
 
@@ -41,6 +41,7 @@ $result = $result_array;
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>Track Requests</title>
 </head>
 <body>
@@ -48,15 +49,6 @@ $result = $result_array;
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <img src="../images/crfms.png">
-                </div>
-                <div class="close" id="toggle-btn">
-                    <span class="material-icons-sharp">menu_open</span>
-                </div>
-            </div>
-
             <div class="sidebar">
                 <a href="Home.php">
                     <span class="material-icons-sharp">home</span>
@@ -78,11 +70,11 @@ $result = $result_array;
                     <span class="material-symbols-outlined">query_stats</span>
                     <h3>Track</h3>
                 </a>
-                <a href="Contact.html">
+                <a href="Contact.php">
                     <span class="material-symbols-outlined">call</span>
                     <h3>Contact Us</h3>
                 </a>
-                <a href="About.html">
+                <a href="About.php">
                     <span class="material-symbols-outlined">info</span>
                     <h3>About Us</h3>
                 </a>
@@ -106,7 +98,12 @@ $result = $result_array;
                 <tbody>
                     <?php foreach ($result as $row): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['reference_id']); ?></td>
+                        <td>
+                            <!-- Link to user_view_request.php with reference_id as a query parameter -->
+                            <a href="php/user_view_request.php?reference_id=<?php echo urlencode($row['reference_id']); ?>">
+                                <?php echo htmlspecialchars($row['reference_id']); ?>
+                            </a>
+                        </td>
                         <td>
                             <div class="status-container">
                                 <span class="status <?php echo isset($row['status_class']) ? $row['status_class'] : ''; ?>">
@@ -114,8 +111,8 @@ $result = $result_array;
                                 </span>
                             </div>
                         </td>
-                        <td><?php echo htmlspecialchars($row['submitted_date']); ?></td>
-                        <td><?php echo htmlspecialchars($row['last_updated']); ?></td>
+                            <td><?php echo date("F j, Y g:i A", strtotime($row['submitted_date'])); ?></td>
+                            <td><?php echo date("F j, Y g:i A", strtotime($row['last_updated'])); ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -123,14 +120,27 @@ $result = $result_array;
         </div>
 
         <nav class="navigation">
-            <button id="theme-toggle" class="btn-theme-toggle">
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
             <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
-        </nav>
+        </div>
+    </nav>    
     </div>
 
     <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
 </body>
 </html>
 

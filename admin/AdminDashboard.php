@@ -11,6 +11,7 @@ $username = $_SESSION['username'];
 
 $conn = new mysqli("localhost", "root", "", "lgutestdb");
 
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -54,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reference_id'], $_POS
     $stmt->execute();
     $stmt->close();
     
-    header("Location: admindashboard.php");
+    header("Location: AdminDashboard.php");
     exit();
 }
 // Query for analytics data from requests
@@ -109,6 +110,7 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>Admin Dashboard</title>
 </head>
 <body>
@@ -116,21 +118,12 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <img src="../images/crfms.png">
-                </div>
-                <div class="close" id="toggle-btn">
-                    <span class="material-icons-sharp">menu_open</span>
-                </div>
-            </div>
-
-            <div class="sidebar">
+           <div class="sidebar">
                 <a href="AdminDashboard.php" class="active">
                     <span class="material-symbols-outlined">dashboard</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="admin.php">
+                <a href="Admin.php">
                     <span class="material-symbols-outlined">shield_person</span>
                     <h3>Admin</h3>
                 </a>
@@ -138,7 +131,7 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
                     <span class="material-symbols-outlined">add_box</span>
                     <h3>Announcements</h3>
                 </a>
-                <a href="reviewsubmissions.php">
+                <a href="Reviewsubmissions.php">
                     <span class="material-symbols-outlined">rate_review</span>         
                     <h3>Review Request & Feedback</h3>
                 </a>
@@ -214,7 +207,7 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
 
                                 echo "<td>" . htmlspecialchars($row['status']) . "</td>";
                                 echo "<td>";
-                                echo "<form action='admindashboard.php' method='POST'>"; 
+                                echo "<form action='AdminDashboard.php' method='POST'>"; 
                                 echo "<input type='hidden' name='reference_id' value='" . htmlspecialchars($row['reference_id']) . "' />";
                                 echo "<select name='new_status' onchange='this.form.submit()'>";
                                 echo "<option value=''>Change Status</option>";
@@ -268,7 +261,7 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
                                 } else {
                                     echo "<td>No Image</td>";
                                 }
-                                echo "<td>" . htmlspecialchars($row['submitted_date']) . "</td>";
+                                echo "<td>" . date("F j, Y g:i A", strtotime($row['submitted_date'])) . "</td>";
                                 echo "</tr>";
                             }
                         } else {
@@ -347,8 +340,8 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
                                 ],
                                 borderColor: [
                                     'rgba(0, 0, 255, 1)',
-                                    'rgba50, 211, 0, 1)',
-                                    'rgba(255, 0, 0 1)',
+                                    'rgba(50, 211, 0, 1)',
+                                    'rgba(255, 0, 0, 1)',
                                     'rgba(255, 165, 0, 1)',
                                     'rgba(255, 255, 0, 1)'
                                 ],
@@ -376,18 +369,30 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
 
         </div>
         <!-- End of Main content -->
+        <!-- navigation -->
         <nav class="navigation">
-            <div class="user-info">
-                <span>Welcome, <?php echo htmlspecialchars($username); ?></span>
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
             </div>
-
-            <button id="theme-toggle" class="btn-theme-toggle">
-                <span class="material-symbols-outlined">light_mode
+            <div class="logo">
+                <a href="AdminDashboard.php">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+                </a>
+            </div>
+        </div>
+        <div class="user-info">
+                <span>Welcome, <?php echo htmlspecialchars($username); ?></span>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                 <span class="material-symbols-outlined">light_mode</span>
-                Toggle Theme
             </button>
             <button class="btnLogin-popup"><a href="php/admin_logout.php">Logout</a></button>
-        </nav>
+        </div>
+    </nav>
     </div>
                 <!-- user delete popups-->
     <div id="user-deleted-popup" class="popup" style="display:none;">
@@ -398,13 +403,14 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
     </div>
     <div id="error-delete-popup" class="popup" style="display:none;">
         <div class="popup-content">
-            <span class="popup-close" onclick="errorDeletePopup()">×</span>
+            <span class="popup-close" onclick="errorDeletePopup()"></span>
             <p>Error could not find user</p>
         </div>
     </div>   
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
 </body>
 </html>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['email'])) {
-    header("Location: login.php");
+    header("Location: ../index.html");
     exit();
 }
 $email = $_SESSION['email']; 
@@ -17,6 +17,7 @@ $email = $_SESSION['email'];
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>Submit Requests or Feedbacks</title>
 </head>
 <body>
@@ -24,15 +25,6 @@ $email = $_SESSION['email'];
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <img src="../images/crfms.png">
-                </div>
-                <div class="close" id="toggle-btn">
-                    <span class="material-icons-sharp">menu_open</span>
-                </div>
-            </div>
-
             <div class="sidebar">
                 <a href="Home.php">
                     <span class="material-icons-sharp">home</span>
@@ -54,11 +46,11 @@ $email = $_SESSION['email'];
                     <span class="material-symbols-outlined">query_stats</span>
                     <h3>Track</h3>
                 </a>
-                <a href="Contact.html">
+                <a href="Contact.php">
                     <span class="material-symbols-outlined">call</span>
                     <h3>Contact Us</h3>
                 </a>
-                <a href="About.html">
+                <a href="About.php">
                     <span class="material-symbols-outlined">info</span>
                     <h3>About Us</h3>
                 </a>
@@ -80,6 +72,7 @@ $email = $_SESSION['email'];
                     <option value="General Inquiry">General Inquiry</option>
                     <option value="Infrastructure Issues">Infrastructure Issues</option>
                     <option value="Complaint">Complaint</option>
+                    <option value="Report">Report</option>
                     <option value="Feedback">Feedback</option>
                 </select>
                 
@@ -102,10 +95,22 @@ $email = $_SESSION['email'];
         </div>
 
         <nav class="navigation">
-            <button id="theme-toggle" class="btn-theme-toggle">
-                <span class="material-symbols-outlined">light_mode</span>
-            </button>
-            <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+            <!-- Left section: Close button and Logo -->
+            <div class="left-section">
+                <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                    <span class="material-icons-sharp">menu_open</span>
+                </div>
+                <div class="logo">
+                        <img src="../images/crfms.png" alt="LGU Logo">
+                </div>
+            </div>
+            <!-- Right section: Theme toggle and Sign up button -->
+            <div class="right-section">
+                <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                    <span class="material-symbols-outlined">light_mode</span>
+                </button>
+                <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+            </div>
         </nav>
     </div>
 
@@ -113,6 +118,6 @@ $email = $_SESSION['email'];
     <script src="submit.js"></script> 
     <script src="maps.js"></script> 
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-
+    <script src="../sidebar.js"></script>
 </body>
 </html>

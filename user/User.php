@@ -2,7 +2,7 @@
 session_set_cookie_params(0);
 session_start();
 if (!isset($_SESSION['username'])) {
-    header("Location: index.html");
+    header("Location: ../index.html");
     exit();
 }
 
@@ -49,6 +49,7 @@ $conn->close();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>User Profile Edit</title>
 </head>
 <body>
@@ -56,15 +57,6 @@ $conn->close();
 <div class="container">
     <!-- Side bar-->
     <aside id="sidebar">
-        <div class="toggle">
-            <div class="logo">
-                <img src="../images/crfms.png" alt="Logo">
-            </div>
-            <div class="close" id="toggle-btn">
-                <span class="material-icons-sharp">menu_open</span>
-            </div>
-        </div>
-
         <div class="sidebar">
             <a href="Home.php">
                 <span class="material-icons-sharp">home</span>
@@ -86,11 +78,11 @@ $conn->close();
                 <span class="material-symbols-outlined">query_stats</span>
                 <h3>Track</h3>
             </a>
-            <a href="Contact.html">
+            <a href="Contact.php">
                 <span class="material-symbols-outlined">call</span>
                 <h3>Contact Us</h3>
             </a>
-            <a href="About.html">
+            <a href="About.php">
                 <span class="material-symbols-outlined">info</span>
                 <h3>About Us</h3>
             </a>
@@ -142,7 +134,9 @@ $conn->close();
 
             <div class="profile-section password-container">
                 <label for="new_password">New Password:</label>
-                <input type="password" id="new_password" name="new_password">
+                <input type="password" id="new_password" name="new_password" 
+                    pattern="(?=.*\d).{8,}" 
+                    title="Password must be at least 8 characters long and include at least 1 number">
                 <button type="button" class="btn-show" onclick="togglePasswordVisibility('new_password')">Show</button>
             </div>
 
@@ -155,11 +149,23 @@ $conn->close();
         </div>
 
     <nav class="navigation">
-        <button id="theme-toggle" class="btn-theme-toggle">
-            <span class="material-symbols-outlined">light_mode</span>
-        </button>
-        <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
-    </nav>
+            <!-- Left section: Close button and Logo -->
+            <div class="left-section">
+                <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                    <span class="material-icons-sharp">menu_open</span>
+                </div>
+                <div class="logo">
+                        <img src="../images/crfms.png" alt="LGU Logo">
+                </div>
+            </div>
+            <!-- Right section: Theme toggle and Sign up button -->
+            <div class="right-section">
+                <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                    <span class="material-symbols-outlined">light_mode</span>
+                </button>
+                <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+            </div>
+        </nav>
 
     <!-- Incorrect Password Popup -->
     <div class="passwordpopup" id="passwordpopup" style="display: <?php echo !empty($errorMessage) ? 'block' : 'none'; ?>;">
@@ -195,5 +201,7 @@ function togglePasswordVisibility(fieldId, btn) {
 }
 </script>
 <script src="../script.js"></script>
+<script src="../sidebar.js"></script>
+<script sr="../password.js"></script>
 </body>
 </html>

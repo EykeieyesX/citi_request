@@ -3,15 +3,16 @@ session_set_cookie_params(0);
 session_start();
 
 if (!isset($_SESSION['username'])) {
-    header('Location: index.html');
+    header('Location: ../index.html');
     exit();
 }
 
-$username = $_SESSION['username'];
+$username   = $_SESSION['username'];
 
 $conn = new mysqli("localhost", "root", "", "lgutestdb");
 
 // Check connection
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -25,6 +26,7 @@ if ($conn->connect_error) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"  rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>LGU User Dashboard</title>
 </head>
 <body>
@@ -32,18 +34,7 @@ if ($conn->connect_error) {
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <img src="../images/crfms.png">
-                </div>
-                <div class="close" id="toggle-btn">
-                    <span class="material-icons-sharp">
-                        menu_open
-                    </span>
-                </div>
-            </div>
-            
-            <div class="sidebar">
+           <div class="sidebar">
                 <a href="Home.php" class="active">
                     <span class="material-icons-sharp">
                         home
@@ -74,13 +65,13 @@ if ($conn->connect_error) {
                     </span>
                     <h3>Track</h3>
                 </a>
-                <a href="Contact.html">
+                <a href="Contact.php">
                     <span class="material-symbols-outlined">
                         call
                     </span>
                     <h3>Contact Us</h3>
                 </a>
-                <a href="About.html">
+                <a href="About.php">
                     <span class="material-symbols-outlined">
                         info
                     </span>
@@ -90,25 +81,50 @@ if ($conn->connect_error) {
         </aside>
         
         <!--Sidebar end-->
-        <iframe src="chatbot.html" style="border: none; width: 70%; height: 600px; position: fixed; bottom: 10px; right: 10px; z-index: 1000"></iframe>
         <!--Main content per page-->
         <div class="main--content">
-            <h2>Home</h2>
-            
-        </div>
+            <h1>FAQ Chatbot</h1>
+   <!--
+     <iframe src="user/chatbot.html" style="border: none; width: 85%; height: 600px; position: fixed; bottom: 10px; right: 10px; z-index: 99">
+     </iframe> 
+    -->         
+    </div>
         <nav class="navigation">
-        <div class="user-info">
-                <span>Welcome, <?php echo htmlspecialchars($username); ?></span>
-        </div>
-            <button id="theme-toggle" class="btn-theme-toggle">
-                <span class="material-symbols-outlined">light_mode</span>
-            </button>
-
-            <button class="btnLogin-popup"><a href="php/logout.php">Logout</button>
-        </nav>
-
+                <!-- Left section: Close button and Logo -->
+                <div class="left-section">
+                    <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                        <span class="material-icons-sharp">menu_open</span>
+                    </div>
+                    <div class="logo">
+                            <img src="../images/crfms.png" alt="LGU Logo">
+                    </div>
+                </div>
+                <div class="user-info">
+                        <span>Welcome, <?php echo htmlspecialchars($username); ?></span>
+                </div>
+                <!-- Right section: Theme toggle and Sign up button -->
+                <div class="right-section">
+                    <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                        <span class="material-symbols-outlined">light_mode</span>
+                    </button>
+                    <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+                </div>
+        </nav>   
     </div>
 
     <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
+    <script>
+        window.embeddedChatbotConfig = {
+        chatbotId: "ZwgIcdWL8-pCavPUOwEWm",
+        domain: "www.chatbase.co"
+        }
+        </script>
+        <script
+        src="https://www.chatbase.co/embed.min.js"
+        chatbotId="ZwgIcdWL8-pCavPUOwEWm"
+        domain="www.chatbase.co"
+        defer>
+    </script>
 </body>
 </html>

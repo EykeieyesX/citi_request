@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
     $storedBarangay = $row['barangay'];
     $storedPassword = $row['password']; // Password hash
 } else {
-    header("Location: admin.php?error=" . urlencode("User not found"));
+    header("Location: Admin.php?error=" . urlencode("User not found"));
     exit();
 }
 
@@ -47,7 +47,7 @@ $newPassword = $_POST['new_password'];
 
 // Verify current password
 if (!password_verify($currentPassword, $storedPassword)) {
-    header("Location: ../admin.php?error=" . urlencode("Incorrect current password"));
+    header("Location: ../Admin.php?error=" . urlencode("Incorrect current password"));
     exit();
 }
 
@@ -63,9 +63,9 @@ if ($stmt->execute()) {
         $stmt->bind_param("ss", $hashedNewPassword, $newUsername);
         $stmt->execute();
     }
-    header("Location: ../admin.php?success=1");
+    header("Location: ../Admin.php?success=1");
 } else {
-    header("Location: ../admin.php?error=" . urlencode("Error updating profile: " . $stmt->error));
+    header("Location: ../Admin.php?error=" . urlencode("Error updating profile: " . $stmt->error));
 }
 
 $stmt->close();

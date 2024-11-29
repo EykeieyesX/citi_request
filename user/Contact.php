@@ -1,3 +1,22 @@
+<?php
+session_set_cookie_params(0); 
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('Location: ../index.html');
+    exit();
+}
+
+$username   = $_SESSION['username'];
+
+$conn = new mysqli("localhost", "root", "", "lgutestdb");
+
+// Check connection
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +25,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>Our Contact</title>
 </head>
 <body>
@@ -13,7 +33,7 @@
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="sidebar">
+           <div class="sidebar">
                 <a href="Home.php">
                     <span class="material-icons-sharp">home</span>
                     <h3>Home</h3>
@@ -34,11 +54,11 @@
                     <span class="material-symbols-outlined">query_stats</span>
                     <h3>Track</h3>
                 </a>
-                <a href="Contact.html" class="active">
+                <a href="Contact.php" class="active">
                     <span class="material-symbols-outlined">call</span>
                     <h3>Contact Us</h3>
                 </a>
-                <a href="About.html">
+                <a href="About.php">
                     <span class="material-symbols-outlined">info</span>
                     <h3>About Us</h3>
                 </a>
@@ -75,7 +95,7 @@
                 </button>
                 <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
             </div>
-        </nav>    
+        </nav>
     </div>
 
     <script src="../script.js"></script>

@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
     $storedEmail = $row['email'];
     $storedPassword = $row['password']; // Password hash
 } else {
-    header("Location: ../user.php?error=User not found");
+    header("Location: ../User.php?error=User not found");
     exit();
 }
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verify current password
     if (!password_verify($currentPassword, $storedPassword)) {
-        header("Location: ../user.php?error=Incorrect current password");
+        header("Location: ../User.php?error=Incorrect current password");
         exit();
     }
 
@@ -63,9 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("ss", $hashedNewPassword, $newUsername);
             $stmt->execute();
         }
-        header("Location: ../user.php?success=profile_updated");
+        header("Location: ../User.php?success=profile_updated");
     } else {
-        header("Location: ../user.php?error=" . urlencode($stmt->error));
+        header("Location: ../User.php?error=" . urlencode($stmt->error));
     }
 
     $stmt->close();

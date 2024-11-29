@@ -7,14 +7,15 @@ if (!isset($_SESSION['username'])) {
     header("Location: AdminLogin.html");
     exit();
 }
-
+date_default_timezone_set('Asia/Manila');
 // Initialize error and success messages
 $errorMessage = "";
 $successMessage = "";
 
 // Include the database connection details
 include '../user/config.php'; 
-
+// set timezone to asia
+$conn->query("SET time_zone = '+08:00'");
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -126,6 +127,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <link rel="stylesheet" href="../style.css">
     <title>Admin Announcements</title>
 </head>
@@ -134,21 +136,12 @@ $conn->close();
 <div class="container">
     <!-- Side bar -->
     <aside id="sidebar">
-        <div class="toggle">
-            <div class="logo">
-                <img src="../images/crfms.png" alt="Logo">
-            </div>
-            <div class="close" id="toggle-btn">
-                <span class="material-icons-sharp">menu_open</span>
-            </div>
-        </div>
-
         <div class="sidebar">
             <a href="AdminDashboard.php">
                 <span class="material-symbols-outlined">dashboard</span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="admin.php">
+            <a href="Admin.php">
                 <span class="material-symbols-outlined">shield_person</span>
                 <h3>Admin</h3>
             </a>
@@ -225,7 +218,12 @@ $conn->close();
                                     <img src="../uploads/<?php echo htmlspecialchars($announcement['images']); ?>" alt="Announcement Image" style="max-width: 100px;">
                                 <?php endif; ?>
                             </td>
-                            <td><?php echo htmlspecialchars($announcement['created_at']); ?></td>
+                            <td>
+                                <?php 
+                                $createdAtDate = new DateTime($announcement['created_at']); // Create DateTime object
+                                echo htmlspecialchars($createdAtDate->format('F d, Y | h:i A')); // Format and output the date
+                                ?>
+                            </td>
                             <td>
                                 <button class="editannouncementbtn" data-id="<?php echo htmlspecialchars($announcement['announcementID']); ?>" data-topic="<?php echo htmlspecialchars($announcement['topic']); ?>" data-description="<?php echo htmlspecialchars($announcement['description']); ?>" data-image="<?php echo htmlspecialchars($announcement['images']); ?>">Edit</button>
                                 <form method="POST" action="php/delete_announcement.php" style="display:inline;">
@@ -262,10 +260,24 @@ $conn->close();
         </div>
     </div>
     <nav class="navigation">
-        <button id="theme-toggle" class="btn-theme-toggle">
-            <span class="material-symbols-outlined">light_mode</span>
-        </button>
-        <button class="btnLogin-popup"><a href="php/admin_logout.php">Logout</a></button>
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                <a href="AdminDashboard.php">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+                </a>
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                <span class="material-symbols-outlined">light_mode</span>
+            </button>
+            <button class="btnLogin-popup"><a href="php/admin_logout.php">Logout</a></button>
+        </div>
     </nav>
 </div>
 
@@ -341,5 +353,6 @@ document.getElementById('editImage').addEventListener('change', function(event) 
     });
 </script>
 <script src="../script.js"></script>
+<script src="../sidebar.js"></script>
 </body>
 </html>

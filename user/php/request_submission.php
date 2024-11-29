@@ -2,6 +2,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Set the default time zone to Asia/Manila
+date_default_timezone_set('Asia/Manila');
+
 // Include the database configuration file
 require_once '../config.php';
 
@@ -9,6 +12,9 @@ require_once '../config.php';
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// Set MySQL time zone to Asia/Manila (UTC+8)
+$conn->query("SET time_zone = '+08:00'");
 
 // Get form data
 $email = $_POST['email'];
