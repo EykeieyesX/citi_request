@@ -10,6 +10,10 @@ if (!isset($_SESSION['username'])) {
 $username   = $_SESSION['username'];
 
 $conn = new mysqli("localhost", "root", "", "lgutestdb");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 // Check connection
 
 if ($conn->connect_error) {
@@ -32,7 +36,15 @@ if ($conn->connect_error) {
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
+<<<<<<< HEAD
+<<<<<<<< HEAD:user/Contact.php
            <div class="sidebar">
+========
+            <div class="sidebar">
+>>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5:user/Contact.html
+=======
+           <div class="sidebar">
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
                 <a href="Home.php">
                     <span class="material-icons-sharp">home</span>
                     <h3>Home</h3>
@@ -45,6 +57,7 @@ if ($conn->connect_error) {
                     <span class="material-icons-sharp">campaign</span>
                     <h3>Announcement</h3>
                 </a>
+<<<<<<< HEAD
                 <a href="certificates.php">
                     <span class="material-symbols-outlined">rate_review</span>
                     <h3>Certificates</h3>
@@ -52,6 +65,11 @@ if ($conn->connect_error) {
                 <a href="Request.php">
                     <span class="material-symbols-outlined">rate_review</span>         
                     <h3>Request</h3>
+=======
+                <a href="Submit.php">
+                    <span class="material-symbols-outlined">rate_review</span>         
+                    <h3>Submit a Request or Feedback</h3>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
                 </a>
                 <a href="track.php">
                     <span class="material-symbols-outlined">query_stats</span>
@@ -98,10 +116,24 @@ if ($conn->connect_error) {
                 </button>
                 <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
             </div>
+<<<<<<< HEAD
+<<<<<<<< HEAD:user/Contact.php
         </nav>
     </div>
 
     <script src="../scriptv4.js"></script>
+========
+        </nav>    
+    </div>
+
+    <script src="../script.js"></script>
+>>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5:user/Contact.html
+=======
+        </nav>
+    </div>
+
+    <script src="../script.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     <script src="../sidebar.js"></script>
 </body>
 </html>

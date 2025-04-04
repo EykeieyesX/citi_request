@@ -97,18 +97,37 @@ b {
 }
 
 /* Sidebar and Layout */
+<<<<<<< HEAD
+=======
+/* Sidebar and Layout */
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 aside {
     height: 100vh;
     position: fixed;
     top: 0;
     left: -250px;
     width: 250px;
+<<<<<<< HEAD
     transition: all 0.3s ease;
     z-index: 9;
+=======
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    transition: all 0.3s ease;
+    z-index: 9;
+    z-index: 9;
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 }
 
 aside.active {
     left: 0;
+<<<<<<< HEAD
+=======
+aside.active {
+    left: 0;
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 }
 
 
@@ -120,6 +139,10 @@ aside .sidebar {
     border-radius: 10px;
     height: 88vh;
     padding-top: 20px;
+<<<<<<< HEAD
+=======
+    padding-top: 20px;
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 }
 
 aside .sidebar a {
@@ -415,8 +438,17 @@ footer {
     top: 0;
     left: 0;
     right: 0;
+<<<<<<< HEAD
     display: flex;
     justify-content: space-between; /* Space between left and right sections */
+=======
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between; /* Space between left and right sections */
+    justify-content: space-between; /* Space between left and right sections */
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     align-items: center;
     font-size: 18px;
     background-color: var(--color-background-lighter);
@@ -457,6 +489,47 @@ footer {
     display: flex;
     align-items: center;
     gap: 16px; /* Space between theme toggle and sign-up button */
+<<<<<<< HEAD
+=======
+    background-color: var(--color-background-lighter);
+    box-shadow: #080917;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+/* Left section: Close button and Logo */
+.navigation .left-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Ensures the left section is aligned to the left */
+}
+
+.navigation .close {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+/* Logo next to Close button */
+.navigation .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 16px; /* Space between the close button and the logo */
+}
+
+.navigation .logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* Right section: Theme toggle and Sign-up button */
+.navigation .right-section {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Space between theme toggle and sign-up button */
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 }
 
 .navigation .btn-theme-toggle {
@@ -574,6 +647,13 @@ body.dark-mode {
     background-color: var(--color-dark);
 }
 
+<<<<<<< HEAD
+=======
+.dark-mode .navigation{
+    background-color: var(--color-dark);
+}
+
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 /* Popup styling */
 .popup {
     position: fixed;
@@ -744,19 +824,44 @@ body.dark-mode {
     margin-top: 70px;
     padding: 1rem; 
     position: relative; 
+<<<<<<< HEAD
+=======
+    margin-left: 220px;
+    margin-top: 70px;
+    padding: 1rem; 
+    position: relative; 
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     background: var(--color-background);
     width: calc(100% - 220px);
 }
 .main--content {
     margin-left: 0; /* Initially, no margin */
     margin-top: 70px;
+<<<<<<< HEAD
+=======
+    width: calc(100% - 220px);
+}
+.main--content {
+    margin-left: 0; /* Initially, no margin */
+    margin-top: 70px;
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     padding: 1rem;
+    position: relative;
+    background: var(--color-background);
+    width: 100%; /* Initially takes up full width */
+    transition: all 0.3s ease; /* Smooth transition for when sidebar toggles */
+<<<<<<< HEAD
+}
+
+=======
     position: relative;
     background: var(--color-background);
     width: 100%; /* Initially takes up full width */
     transition: all 0.3s ease; /* Smooth transition for when sidebar toggles */
 }
 
+
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 
 /* Header wrapper */
 .header--wrapper {
@@ -1346,6 +1451,24 @@ color: var(--color-text);
   .backtotrack a:hover {
     background-color: var(--color-secondary);
   }
+<<<<<<< HEAD
+=======
+.backtotrack a {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .backtotrack a:hover {
+    background-color: var(--color-secondary);
+  }
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
   
   .updaterequeststatus button {
     background-color: var(--color-primary);
@@ -1731,6 +1854,7 @@ color: var(--color-text);
         overflow: hidden;
         text-overflow: ellipsis; /* Adds ellipsis if text overflows */
     }
+<<<<<<< HEAD
 }
 
 /*Integration additions/revisions */
@@ -1774,4 +1898,6 @@ color: var(--color-text);
 
 .suggestion-item:hover {
     background-color: #f0f0f0;
+=======
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 }

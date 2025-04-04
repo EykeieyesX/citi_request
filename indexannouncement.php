@@ -92,6 +92,11 @@
             <button class="btnLogin-popup" aria-label="Sign Up">Sign Up</button>
         </div>
     </nav>
+<<<<<<< HEAD
+=======
+        </div>
+    </nav>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     </div>
     
     <!-- Signup Form --> 
@@ -189,7 +194,11 @@
         </div>
     </div>      
 
+<<<<<<< HEAD
     <script src="scriptv4.js"></script>
+=======
+    <script src="script.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     <script src="sidebar.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

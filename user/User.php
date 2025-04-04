@@ -172,6 +172,12 @@ $conn->close();
                 <input type="password" id="new_password" name="new_password" 
                     pattern="(?=.*\d).{8,}" 
                     title="Password must be at least 8 characters long and include at least 1 number">
+<<<<<<< HEAD
+=======
+                <input type="password" id="new_password" name="new_password" 
+                    pattern="(?=.*\d).{8,}" 
+                    title="Password must be at least 8 characters long and include at least 1 number">
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
                 <button type="button" class="btn-show" onclick="togglePasswordVisibility('new_password')">Show</button>
             </div>
 
@@ -181,6 +187,7 @@ $conn->close();
                 </div>
             </div>
         </form>
+<<<<<<< HEAD
     </div>
 
     <nav class="navigation">
@@ -201,6 +208,28 @@ $conn->close();
             <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
         </div>
     </nav>
+=======
+        </div>
+    
+    <nav class="navigation">
+            <!-- Left section: Close button and Logo -->
+            <div class="left-section">
+                <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                    <span class="material-icons-sharp">menu_open</span>
+                </div>
+                <div class="logo">
+                        <img src="../images/crfms.png" alt="LGU Logo">
+                </div>
+            </div>
+            <!-- Right section: Theme toggle and Sign up button -->
+            <div class="right-section">
+                <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                    <span class="material-symbols-outlined">light_mode</span>
+                </button>
+                <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+            </div>
+        </nav>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 
     <!-- Incorrect Password Popup -->
     <div class="passwordpopup" id="passwordpopup" style="display: <?php echo !empty($errorMessage) ? 'block' : 'none'; ?>;">
@@ -233,7 +262,11 @@ function togglePasswordVisibility(fieldId, btn) {
     }
 }
 </script>
+<<<<<<< HEAD
 <script src="../scriptv4.js"></script>
+=======
+<script src="../script.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 <script src="../sidebar.js"></script>
 <script sr="../password.js"></script>
 </body>

@@ -1,6 +1,10 @@
 <?php
 session_start();
+<<<<<<< HEAD
 if (!isset($_SESSION['username'])) {
+=======
+if (!isset($_SESSION['email'])) {
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     header("Location: ../index.html");
     exit();
 }
@@ -204,6 +208,7 @@ $barangay_clearance_data = $result_clearance->fetch_all(MYSQLI_ASSOC);
     <div class="container">
         <aside id="sidebar">
             <div class="sidebar">
+<<<<<<< HEAD
                 <a href="Home.php"><span class="material-icons-sharp">home</span><h3>Home</h3></a>
                 <a href="User.php"><span class="material-icons-sharp">person_outline</span><h3>User</h3></a>
                 <a href="Announcement.php"><span class="material-icons-sharp">campaign</span><h3>Announcement</h3></a>
@@ -212,12 +217,43 @@ $barangay_clearance_data = $result_clearance->fetch_all(MYSQLI_ASSOC);
                 <a href="track.php" class="active"><span class="material-symbols-outlined">query_stats</span><h3>Track</h3></a>
                 <a href="Contact.php"><span class="material-symbols-outlined">call</span><h3>Contact Us</h3></a>
                 <a href="About.php"><span class="material-symbols-outlined">info</span><h3>About Us</h3></a>
+=======
+                <a href="Home.php">
+                    <span class="material-icons-sharp">home</span>
+                    <h3>Home</h3>
+                </a>
+                <a href="User.php">
+                    <span class="material-icons-sharp">person_outline</span>
+                    <h3>User</h3>
+                </a>
+                <a href="Announcement.php">
+                    <span class="material-icons-sharp">campaign</span>
+                    <h3>Announcement</h3>
+                </a>
+                <a href="Submit.php">
+                    <span class="material-symbols-outlined">rate_review</span>
+                    <h3>Submit a Request or Feedback</h3>
+                </a>
+                <a href="track.php" class="active">
+                    <span class="material-symbols-outlined">query_stats</span>
+                    <h3>Track</h3>
+                </a>
+                <a href="Contact.php">
+                    <span class="material-symbols-outlined">call</span>
+                    <h3>Contact Us</h3>
+                </a>
+                <a href="About.php">
+                    <span class="material-symbols-outlined">info</span>
+                    <h3>About Us</h3>
+                </a>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
             </div>
         </aside>
 
         <div class="main--content">
             <h1>Track your Requests</h1>
             
+<<<<<<< HEAD
             <h3>Barangay ID Requests</h3>
             <form method="GET" action="" class="search-form">
                 <input type="text" name="id_search" placeholder="Search by Request Number, Transaction ID, or Status" value="<?php echo htmlspecialchars($id_search); ?>">
@@ -337,6 +373,62 @@ $barangay_clearance_data = $result_clearance->fetch_all(MYSQLI_ASSOC);
         </nav>
     </div>
     <script src="../scriptv4.js"></script>
+=======
+            <table id="tracking-table">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Status</th>
+                        <th>Submitted Date</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($result as $row): ?>
+                    <tr>
+                        <td>
+                            <!-- Link to user_view_request.php with reference_id as a query parameter -->
+                            <a href="php/user_view_request.php?reference_id=<?php echo urlencode($row['reference_id']); ?>">
+                                <?php echo htmlspecialchars($row['reference_id']); ?>
+                            </a>
+                        </td>
+                        <td>
+                            <div class="status-container">
+                                <span class="status <?php echo isset($row['status_class']) ? $row['status_class'] : ''; ?>">
+                                    <?php echo htmlspecialchars($row['status']); ?>
+                                </span>
+                            </div>
+                        </td>
+                            <td><?php echo date("F j, Y g:i A", strtotime($row['submitted_date'])); ?></td>
+                            <td><?php echo date("F j, Y g:i A", strtotime($row['last_updated'])); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <nav class="navigation">
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                    <img src="../images/crfms.png" alt="LGU Logo">
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                <span class="material-symbols-outlined">light_mode</span>
+            </button>
+            <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+        </div>
+    </nav>    
+    </div>
+
+    <script src="../script.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     <script src="../sidebar.js"></script>
 </body>
 </html>

@@ -110,7 +110,10 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="styles/pending-requests-css.css">
+=======
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>Admin Dashboard</title>
 </head>
@@ -420,6 +423,13 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
         <!-- Right section: Theme toggle and Sign up button -->
         <div class="right-section">
             <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+<<<<<<< HEAD
+=======
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
             <button class="btnLogin-popup"><a href="php/admin_logout.php">Logout</a></button>
@@ -441,7 +451,12 @@ $submittedFeedbackCount = $conn->query("SELECT COUNT(*) FROM feedback")->fetch_r
     </div>   
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<<<<<<< HEAD
     <script src="../scriptv4.js"></script>
+=======
+    <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     <script src="../sidebar.js"></script>
 </body>
 </html>

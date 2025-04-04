@@ -1,22 +1,20 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
-    header("Location: AdminLogin.html");
+// Ensure user is logged in
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
     exit();
 }
 
-// Set the default time zone to Asia/Manila
-date_default_timezone_set('Asia/Manila');
+// Include the database connection
+include '../config.php';
 
-// Include the database connection details
-include '../../user/config.php';
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-// timezone for updates
-$conn->query("SET time_zone = '+08:00'");
 
+// Fetch the reference_id from the URL
 $reference_id = $_GET['reference_id'];
 
 // Prepared statement to prevent SQL injection
@@ -31,77 +29,32 @@ if (!$request) {
     echo "Request not found!";
     exit();
 }
-
-// List of all valid statuses
-$all_statuses = ['Submitted', 'Reviewed', 'In-Progress', 'Completed', 'Cancelled'];
-<<<<<<< HEAD
-=======
-$all_statuses = ['Submitted', 'Reviewed', 'In-Progress', 'Completed', 'Cancelled'];
->>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
-$current_status = $request['status'];
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $new_status = $_POST['status'];
-    $admin_message = $_POST['admin_message'];  
-<<<<<<< HEAD
-=======
-    $admin_message = $_POST['admin_message'];  
->>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
-
-    // Prepare the SQL update statement to update both status and message
-    $sql_update = "UPDATE request SET status = ?, adminmessage = ?, last_updated = NOW() WHERE reference_id = ?";
-    $stmt_update = $conn->prepare($sql_update);
-    $stmt_update->bind_param("sss", $new_status, $admin_message, $reference_id);
-<<<<<<< HEAD
-
-    if ($stmt_update->execute()) {
-        echo "Status and message updated successfully!";
-        header("Refresh:0");
-    } else {
-        echo "Error updating status and message: " . $conn->error;
-=======
-    $stmt_update->bind_param("sss", $new_status, $admin_message, $reference_id);
-
-    if ($stmt_update->execute()) {
-        echo "Status and message updated successfully!";
-        echo "Status and message updated successfully!";
-        header("Refresh:0");
-    } else {
-        echo "Error updating status and message: " . $conn->error;
-        echo "Error updating status and message: " . $conn->error;
->>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
-    }
-}
 // Fetch the attached images from the database
 $request_images = [];
 if (!empty($request['images']) && $request['images'] !== 'NULL') {
     $images = explode(',', $request['images']);
     foreach ($images as $image) {
-        $imagePath = '../../uploads/' . $image; // Path to the image
+        $imagePath = '../../uploads/' . $image;
         if (file_exists($imagePath)) {
-            // Base64 encode the image content
-            $imageData = base64_encode(file_get_contents($imagePath)); 
-            $request_images[] = 'data:image/jpeg;base64,' . $imageData; // Add the base64 image to the array
+            $imageData = base64_encode(file_get_contents($imagePath));
+            $request_images[] = 'data:image/jpeg;base64,' . $imageData;
         }
     }
 }
 
-// Pass the base64-encoded images to JavaScript
 $request_images_json = json_encode($request_images);
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Request</title>
+    <title>View Request - User</title>
+    <link rel="stylesheet" href="../../style.css">
     <link rel="icon" type="image/x-icon" href="../../images/lguicon.png" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
     <style>
-        /* Styling the download buttons */
         .download-buttons {
             margin-top: 20px;
             text-align: center;
@@ -124,7 +77,6 @@ $request_images_json = json_encode($request_images);
     </style>
 </head>
 <body>
-
 <div class="view-request-container">
     <div class="view-request-header">
         <h2>Request Details</h2>
@@ -136,58 +88,63 @@ $request_images_json = json_encode($request_images);
                 <th>Value</th>
             </tr>
             <tr>
-                <td>Reference ID:</td>
+                <td><strong>Reference ID:</strong></td>
                 <td><?php echo htmlspecialchars($request['reference_id']); ?></td>
             </tr>
             <tr>
-                <td>Email:</td>
+                <td><strong>Email:</strong></td>
                 <td><?php echo htmlspecialchars($request['email']); ?></td>
             </tr>
             <tr>
-                <td>Topic:</td>
+                <td><strong>Topic:</strong></td>
                 <td><?php echo htmlspecialchars($request['topic']); ?></td>
             </tr>
             <tr>
-                <td>Description:</td>
-                <td><?php echo htmlspecialchars($request['description']); ?></td>
+                <td><strong>Description:</strong></td>
+                <td><?php echo nl2br(htmlspecialchars($request['description'])); ?></td>
             </tr>
             <tr>
-                <td>Location:</td>
+                <td><strong>Location:</strong></td>
                 <td><?php echo htmlspecialchars($request['location']); ?></td>
             </tr>
             <tr>
-                <td>Status:</td>
+                <td><strong>Status:</strong></td>
                 <td><?php echo htmlspecialchars($request['status']); ?></td>
             </tr>
-            <tr>
-                <td>Submitted Date:</td>
+           <tr>
+            <td><strong>Submitted Date:</strong></td>
             <td><?php 
                 $submittedDate = new DateTime($request['submitted_date']);
                 echo $submittedDate->format('F j, Y'); 
             ?></td>
-            </tr>
-             <tr>
-            <td>Time:</td>
+        </tr>
+        <tr>
+            <td><strong>Time:</strong></td>
             <td><?php 
                 echo $submittedDate->format('g:i a');
             ?></td>
-            </tr>
-            <tr>
-            <td>Last Updated:</td>
+        </tr>
+        <tr>
+            <td><strong>Last Updated:</strong></td>
             <td>
                 <?php 
                     $lastUpdatedDate = new DateTime($request['last_updated']);
                     echo $lastUpdatedDate->format('F j, Y'); 
                 ?>
             </td>
+        </tr>
+        <tr>
+            <td><strong>Time:</strong></td>
+            <td><?php 
+                echo $lastUpdatedDate->format('g:i a');
+            ?></td>
+        </tr>
+            <?php if (!empty($request['adminmessage'])): ?>
             <tr>
-            <td> Time </td>
-             <td>   <?php 
-                    echo $lastUpdatedDate->format('g:i a');
-                ?>
-            </td>
+                <td><strong>Admin Message:</strong></td>
+                <td><?php echo nl2br(htmlspecialchars($request['adminmessage'])); ?></td>
             </tr>
-            </tr>
+            <?php endif; ?>
         </table>
 
         <!-- Display Images if available -->
@@ -204,55 +161,16 @@ $request_images_json = json_encode($request_images);
                 <?php endif; ?>
             </div>
         </div>
-
-        <div class="statuschange">
-            <h3>Update Status and Leave a Message</h3>
-<<<<<<< HEAD
-=======
-            <h3>Update Status and Leave a Message</h3>
->>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
-            <div class="view-updatestatus">
-                <form method="POST" action="">
-                    <label for="status">Status:</label>
-                    <select name="status" id="status" <?php echo ($current_status === 'Completed' || $current_status === 'Cancelled') ? 'disabled' : ''; ?>>
-                        <option value="">Change Status</option>
-                        <?php foreach ($all_statuses as $status): ?>
-                            <option value="<?php echo $status; ?>" <?php if ($status === $current_status) echo 'selected'; ?>><?php echo $status; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-
-                    <div class="admin-message-container">
-                        <label for="admin_message">Admin Message:</label>
-                        <textarea name="admin_message" id="admin_message" rows="4" placeholder="Enter your message here..."><?php echo htmlspecialchars($request['adminmessage']); ?></textarea>
-                    </div>
-
-<<<<<<< HEAD
-=======
-
-                    <div class="admin-message-container">
-                        <label for="admin_message">Admin Message:</label>
-                        <textarea name="admin_message" id="admin_message" rows="4" placeholder="Enter your message here..."><?php echo htmlspecialchars($request['adminmessage']); ?></textarea>
-                    </div>
-
->>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
-                    <div class="updaterequeststatus">
-                        <?php if ($current_status !== 'Completed' && $current_status !== 'Cancelled'): ?>
-                            <button type="submit">Update</button>
-                        <?php else: ?>
-                            <p>Status cannot be changed.</p>
-                        <?php endif; ?>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
-    <!-- Download buttons for CSV and PDF -->
     <div class="download-buttons">
         <button onclick="downloadCSV()">Download as CSV</button>
         <button onclick="generatePDF()">Download as PDF</button>
-</div>
-</div>
+    </div>
 
+</div>
+<div class="backtoreview">
+    <a href="../track.php">Back to Track Requests</a>
+</div>
 <script>
     // Pass the PHP array of base64 images to JavaScript
     const requestImages = <?php echo $request_images_json; ?>;
@@ -298,7 +216,10 @@ function downloadCSV() {
         ["Submitted Date", "<?php echo $submittedDate->format('F/j/Y'); ?>"],
         ["Time", "<?php echo $submittedDate->format('g:i a'); ?>"],
         ["Last Updated", "<?php echo $lastUpdatedDate->format('F/j/Y'); ?>"],
-        ["Time", "<?php echo $lastUpdatedDate->format('g:i a'); ?>"]
+        ["Time", "<?php echo $lastUpdatedDate->format('g:i a'); ?>"],
+         <?php if (!empty($request['adminmessage'])): ?>
+            ["Admin Message", "<?php echo nl2br(htmlspecialchars($request['adminmessage'])); ?>"]
+            <?php endif; ?>
     ];
 
     let csvFile = "";
@@ -310,7 +231,7 @@ function downloadCSV() {
     let hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvFile);
     hiddenElement.target = '_blank';
-    hiddenElement.download = `${referenceId}-Request-Form.csv`; // Set the filename with reference ID
+    hiddenElement.download = `${referenceId}-Request-Form.csv`;
     hiddenElement.click();
 }
 
@@ -329,7 +250,7 @@ function generatePDF() {
 
     // Fields for the request details
     const fields = [
-        { label: "Reference ID", value: referenceId },
+        { label: "Reference ID", value: "<?php echo htmlspecialchars($request['reference_id']); ?>" },
         { label: "Email", value: "<?php echo htmlspecialchars($request['email']); ?>" },
         { label: "Topic", value: "<?php echo htmlspecialchars($request['topic']); ?>" },
         { label: "Description", value: "<?php echo htmlspecialchars($request['description']); ?>" },
@@ -341,6 +262,14 @@ function generatePDF() {
         { label: "Updated Time", value: "<?php echo $lastUpdatedDate->format('g:i a'); ?>" }
     ];
 
+    // Add admin message field if it exists
+    if ("<?php echo !empty($request['adminmessage']) ? 'true' : 'false'; ?>" === 'true') {
+        fields.push({
+            label: "Admin Message", 
+            value: "<?php echo nl2br(htmlspecialchars($request['adminmessage'])); ?>"
+        });
+    }
+
     // Table settings
     const margin = 20; // Table margin
     const x = 20; // Left padding
@@ -351,8 +280,11 @@ function generatePDF() {
 
     // Loop through fields to create rows in the table with precise spacing for text
     fields.forEach((field) => {
+        // Ensure that any special characters in the value are handled properly
+        const value = encodeURIComponent(field.value); // Escape special characters
+
         // Determine the row height based on the text's actual size in the value cell
-        const splitText = doc.splitTextToSize(field.value, valueCellWidth - 4); // Split text based on cell width
+        const splitText = doc.splitTextToSize(decodeURIComponent(value), valueCellWidth - 4); // Split text based on cell width
         const rowHeight = lineHeight * splitText.length; // Row height is lineHeight times the number of text lines
 
         // Draw cell for label
@@ -367,33 +299,31 @@ function generatePDF() {
         // Move to the next row position
         y += rowHeight;
     });
+
     // Add a margin before the images (add space between table and images)
     const imageMargin = 10;
     y += imageMargin;
+
     // Add attached images (if any)
     if (requestImages && requestImages.length > 0) {
         requestImages.forEach((imageBase64) => {
             // Set image dimensions: same width as the table and height 60px
             const imageWidth = labelCellWidth + valueCellWidth; // Total width of the table
-            const imageHeight = 100; // Fixed height for images
-
-            // Add the image to the PDF
-            doc.addImage(imageBase64, 'JPEG', x, y, imageWidth, imageHeight); // Adjust image placement
-            y += imageHeight + 10; // Move the cursor down for next content (adding 10px for spacing)
+            const imageHeight = 100; // Fixed height
+            doc.addImage(imageBase64, "JPEG", x, y, imageWidth, imageHeight);
+            y += imageHeight + 5;
         });
     }
 
-    // Save the PDF with the reference ID in the filename
+    // Save the PDF with the reference ID as the filename
     doc.save(`${referenceId}-Request-Form.pdf`);
 }
 
 </script>
-<div class="backtoreview">
-    <a href="../Reviewsubmissions.php">Back to Review Submissions</a>
-</div>
 </body>
 </html>
 
 <?php
+$stmt->close();
 $conn->close();
 ?>

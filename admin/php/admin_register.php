@@ -2,9 +2,15 @@
 session_start();
 
 $servername = "localhost";
+<<<<<<< HEAD
 $username = "citi_lgutestdb1";
 $password = "GGpfr89ly9h6qJF7";
 $dbname = "citi_lgutestdb";
+=======
+$username = "root";
+$password = "";
+$dbname = "lgutestdb";
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 
 // Connect to the database
 $conn = new mysqli($servername, $username, $password, $dbname);

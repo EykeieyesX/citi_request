@@ -46,7 +46,29 @@
                 <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                     <span class="material-symbols-outlined">light_mode</span>
                 </button>
+<<<<<<< HEAD
                 <button class="btnLogin-popup" aria-label="Login">Login</button>
+=======
+                <button class="btnLogin-popup" aria-label="Sign Up">Sign Up</button>
+            </div>
+            <!-- Left section: Close button and Logo -->
+            <div class="left-section">
+                <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                    <span class="material-icons-sharp">menu_open</span>
+                </div>
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/crfms.png" alt="LGU Logo">
+                    </a>
+                </div>
+            </div>
+            <!-- Right section: Theme toggle and Sign up button -->
+            <div class="right-section">
+                <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                    <span class="material-symbols-outlined">light_mode</span>
+                </button>
+                <button class="btnLogin-popup" aria-label="Sign Up">Sign Up</button>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
             </div>
         </nav>
     </div>
@@ -70,6 +92,7 @@
                 <button type="submit" class="btn">Login</button>
             </form>
         </div>
+<<<<<<< HEAD
        <!--<div class="form-box register">-->
        <!--     <h2>Admin Registration</h2>-->
        <!--     <form action="php/admin_register.php" method="post" id="adminRegistrationForm">-->
@@ -111,6 +134,59 @@
        <!--         </div>-->
        <!--     </form>-->
        <!-- </div>-->
+=======
+       <div class="form-box register">
+            <h2>Admin Registration</h2>
+            <form action="php/admin_register.php" method="post" id="adminRegistrationForm">
+            <form action="php/admin_register.php" method="post" id="adminRegistrationForm">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" name="username" required autocomplete="off">
+                    <input type="text" name="username" required autocomplete="off">
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" name="firstname" required autocomplete="off">
+                    <label>First Name</label> 
+                    <input type="text" name="firstname" required autocomplete="off">
+                    <label>First Name</label> 
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" name="lastname" required autocomplete="off">
+                    <input type="text" name="lastname" required autocomplete="off">
+                    <label>Last Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="home"></ion-icon></span>
+                    <input type="text" name="barangay" required autocomplete="off">
+                    <input type="text" name="barangay" required autocomplete="off">
+                    <label>Barangay</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="password" id="adminPassword" pattern="(?=.*\d).{8,}" 
+                           title="Password must be at least 8 characters long and include at least 1 number" 
+                           required>
+                    <input type="password" name="password" id="adminPassword" pattern="(?=.*\d).{8,}" 
+                           title="Password must be at least 8 characters long and include at least 1 number" 
+                           required>
+                    <label>Password</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="key"></ion-icon></span>
+                    <input type="text" name="admin_code" required autocomplete="off">
+                    <input type="text" name="admin_code" required autocomplete="off">
+                    <label>Admin Code</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="login-register">
+                    <label>Already have an account? <a href="#" class="login-link">Login</a></label>
+                </div>
+            </form>
+        </div>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     </div>
 
 
@@ -137,6 +213,10 @@
     <div id="admin-not-found-popup" class="popup">
         <div class="popup-content">
             <span class="popup-close" onclick="closeUserNotFoundPopup()">x</span>
+<<<<<<< HEAD
+=======
+            <span class="popup-close" onclick="closeUserNotFoundPopup()">x</span>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
             <p>Admin User not found. Please check your username and try again.</p>
         </div>
     </div>
@@ -149,7 +229,13 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <script src="../scriptv4.js"></script>
+=======
+    <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
+    <script src="../password.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     <script src="../sidebar.js"></script>
     <script src="../password.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -123,5 +123,9 @@ $email = $_SESSION['email'];
     <script src="maps.js"></script> 
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="../sidebar.js"></script>
+<<<<<<< HEAD
+=======
+    <script src="../sidebar.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 </body>
 </html>

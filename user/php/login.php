@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ]);
     }
 
+<<<<<<< HEAD
 } else {
     echo json_encode([
         'status' => 0,
@@ -95,3 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 }
 ?>
+=======
+$stmt->close();
+$conn->close();
+?>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5

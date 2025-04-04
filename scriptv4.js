@@ -1,12 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    /*** SIDEBAR TOGGLE FUNCTIONALITY ***/
-    const sidebar = document.getElementById("sidebar");
-    const toggleBtn = document.getElementById("toggle-btn");
-
-    toggleBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("minimized"); // Minimize/expand sidebar
-    });
-
     /*** THEME TOGGLE FUNCTIONALITY ***/
     const themeToggleBtn = document.getElementById("theme-toggle");
     const savedTheme = localStorage.getItem("theme");

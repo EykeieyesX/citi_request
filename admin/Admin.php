@@ -139,6 +139,12 @@ $conn->close();
                 <input type="password" id="new_password" name="new_password"
                     pattern="(?=.*\d).{8,}"
                     title="Password must be at least 8 characters long and include at least 1 number">
+<<<<<<< HEAD
+=======
+                <input type="password" id="new_password" name="new_password"
+                    pattern="(?=.*\d).{8,}"
+                    title="Password must be at least 8 characters long and include at least 1 number">
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
                 <button type="button" class="btn-show" onclick="togglePasswordVisibility('new_password')">Show</button>
             </div>
 
@@ -202,7 +208,11 @@ function togglePasswordVisibility(fieldId, btn) {
 }
 </script>
 <script src="../sidebar.js"></script>
+<<<<<<< HEAD
 <script src="../scriptv4.js"></script>
+=======
+<script src="../script.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
 <script src="../password.js"></script>
 </body>
 </html>

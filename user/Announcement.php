@@ -149,7 +149,12 @@ if ($conn->connect_error) {
         </nav>
     </div>
 
+<<<<<<< HEAD
     <script src="../scriptv4.js"></script>
+=======
+    <script src="../script.js"></script>
+    <script src="../sidebar.js"></script>
+>>>>>>> 9cdd39e2d17f7ba465f19bbdd19dba7ab44c0de5
     <script src="../sidebar.js"></script>
 </body>
 </html>
