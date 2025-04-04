@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->affected_rows > 0) {
         // Redirect back to the announcements page with a success message
-        header("Location: ../adminannouncement.php?success=Deleted successfully.");
+        header("Location: ../AdminAnnouncement.php?success=Deleted successfully.");
     } else {
         // Redirect back to the announcements page with an error message
-        header("Location: ../adminannouncement.php?error=Announcement not found.");
+        header("Location: ../AdminAnnouncement.php?error=Announcement not found.");
     }
 
     // Close the statement

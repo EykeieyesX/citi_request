@@ -6,23 +6,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/lguicon.png" />
     <title>Announcements</title>
 </head>
 <body>
     <div class="container">
         <!-- Side bar-->
         <aside id="sidebar">
-            <div class="toggle">
-                <div class="logo">
-                    <a href="admin/AdminLogin.html">
-                        <img src="images/crfms.png" alt="LGU Logo"></a>
-                </div>
-                <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
-                    <span class="material-icons-sharp">menu_open</span>
-                </div>
-            </div>
-
-            <div class="sidebar">
+          <div class="sidebar">
                 <a href="index.html">
                     <span class="material-symbols-outlined">favorite</span>                   
                      <h3>Welcome</h3>
@@ -41,14 +32,7 @@
             <div id="announcement-container">
 
             <?php
-                // Connect to the database
-                $servername = "localhost"; 
-                $username = "root"; 
-                $password = ""; 
-                $dbname = "lgutestdb"; 
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli("localhost", "citi_lgutestdb1", "GGpfr89ly9h6qJF7", "citi_lgutestdb");
 
                 // Check connection
                 if ($conn->connect_error) {
@@ -88,16 +72,26 @@
             </div>
         </div>
         
-        <!-- Light/Dark Mode Toggle Button -->
-        <nav class="navigation">
+         <nav class="navigation">
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                <a href="admin/AdminLogin.html">
+                    <img src="images/crfms.png" alt="LGU Logo">
+                </a>
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
             <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
-
-            <!-- Signup Button -->
-
             <button class="btnLogin-popup" aria-label="Sign Up">Sign Up</button>
-        </nav>
+        </div>
+    </nav>
     </div>
     
     <!-- Signup Form --> 
@@ -105,7 +99,7 @@
         <span class="icon-close" onclick="closePopup()"><ion-icon name="close"></ion-icon></span>
         <div class="form-box login">
             <h2>Login</h2>
-            <form action="login.php" method="post">
+            <form action="user/php/login.php" method="post">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="person"></ion-icon></span>
                     <input type="text" name="username" required aria-label="Username">
@@ -125,7 +119,7 @@
         </div>
         <div class="form-box register">
             <h2>Registration</h2>
-            <form action="register.php" method="post">
+            <form action="user/php/register.php" method="post" id="registrationForm">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="person"></ion-icon></span>
                     <input type="text" name="username" required aria-label="Username">
@@ -148,7 +142,9 @@
                 </div>
                 <div class="input-box">
                     <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                    <input type="password" name="password" required aria-label="Password">
+                    <input type="password" name="password" id="password" pattern="(?=.*\d).{8,}" 
+                           title="Password must be at least 8 characters long and include at least 1 number" 
+                           required aria-label="Password">
                     <label>Password</label>
                 </div>
                 <div class="remember-forgot">
@@ -161,17 +157,6 @@
             </form>
         </div>
     </div>
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 LGU User Dashboard. All rights reserved.</p>
-            <ul class="footer-links">
-                <li><a href="Privacy.html" rel="noopener noreferrer">Privacy Policy</a></li>
-                <li><a href="Terms.html" rel="noopener noreferrer">Terms of Service</a></li>
-            </ul>
-        </div>
-    </footer>
-
     <!-- Popups -->
     <div id="username-error-popup" class="popup" style="display:none;">
         <div class="popup-content">
@@ -193,7 +178,7 @@
     </div>
     <div id="password-error-popup" class="popup" style="display:none;">
         <div class="popup-content">
-            <span class="popup-close" onclick="closePasswordErrorPopup()">×</span>
+            <span class="popup-close" onclick="closePasswordErrorPopup()"></span>
             <p>Incorrect Password. Please try again.</p>
         </div>
     </div>
@@ -204,8 +189,10 @@
         </div>
     </div>      
 
-    <script src="script.js"></script>
+    <script src="scriptv4.js"></script>
+    <script src="sidebar.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="password.js"></script>
 </body>
 </html>

@@ -16,17 +16,17 @@ function sendResetEmail($email, $token) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com'; 
         $mail->SMTPAuth   = true; 
-        $mail->Username = 'wsenpai213@gmail.com'; 
-        $mail->Password = 'hiukvuuzwfpitvaz'; 
+        $mail->Username = 'shinoyaotowama@gmail.com'; 
+        $mail->Password = 'qhxibprawqfytwwc'; 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = 465;
 
         // Recipients
-        $mail->setFrom('wsenpai213@gmail.com', 'Admin');
-        $mail->addAddress($email); // Add a recipient
+        $mail->setFrom('shinoyaotowama@gmail.com', 'Admin Support');
+        $mail->addAddress($email);
 
         // Content
-        $resetLink = "http://localhost/citizen/user/reset_password.php?token=$token"; 
+        $resetLink = "https://citizenrequest.lgu2.com/user/reset_password.php?token=$token"; 
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset';
         $mail->Body    = 'Click the link to reset your password: <a href="' . $resetLink . '">Reset Password</a>';
@@ -40,13 +40,13 @@ function sendResetEmail($email, $token) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email']; // Assuming you're getting the email from a form
+    $email = $_POST['email']; 
 
-    // Generate a token and set the expiry time
+    // Token expiry, 1hour only
     $token = bin2hex(random_bytes(16));
     $token_expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
 
-    // Update the usercredentials table with the reset token and expiry
+    // Update the usercredentials table
     $stmt = $conn->prepare("UPDATE usercredentials SET reset_token = ?, token_expiry = ? WHERE email = ?");
     $stmt->bind_param("sss", $token, $token_expiry, $email);
 

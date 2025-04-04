@@ -2,7 +2,7 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "lgutestdb";
+$database = "citi_lgutestdb";
 $conn = mysqli_connect($host, $username, $password, $database);
 
 if (!$conn) {

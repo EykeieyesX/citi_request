@@ -1,27 +1,38 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 session_set_cookie_params(0);
 session_start();
+
 if (!isset($_SESSION['username'])) {
-    header("Location: index.html");
+    header("Location: ../index.html");
     exit();
 }
 
 // Include the database configuration file
 require_once 'config.php';
 
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 $currentUsername = $_SESSION['username'];
-$stmt = $conn->prepare("SELECT username, firstname, lastname, email, password FROM usercredentials WHERE username = ?");
+$stmt = $conn->prepare("SELECT id, api_id, username, firstname, middlename, lastname, email, areaofcencusstreet, password_hash FROM census_credentials WHERE username = ?");
 $stmt->bind_param("s", $currentUsername);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    $id = htmlspecialchars($row['id']);
+    $api_id = htmlspecialchars($row['api_id']);
     $username = htmlspecialchars($row['username']);
     $firstname = htmlspecialchars($row['firstname']);
+    $middlename = htmlspecialchars($row['middlename']);
     $lastname = htmlspecialchars($row['lastname']);
     $email = htmlspecialchars($row['email']);
-    $hashedPassword = $row['password']; 
+    $areaofcencusstreet = htmlspecialchars($row['areaofcencusstreet']);
+    $password_hash = $row['password_hash']; 
 } else {
     header("Location: ../index.html");
     exit();
@@ -49,6 +60,7 @@ $conn->close();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../images/lguicon.png"/>
     <title>User Profile Edit</title>
 </head>
 <body>
@@ -56,15 +68,6 @@ $conn->close();
 <div class="container">
     <!-- Side bar-->
     <aside id="sidebar">
-        <div class="toggle">
-            <div class="logo">
-                <img src="../images/crfms.png" alt="Logo">
-            </div>
-            <div class="close" id="toggle-btn">
-                <span class="material-icons-sharp">menu_open</span>
-            </div>
-        </div>
-
         <div class="sidebar">
             <a href="Home.php">
                 <span class="material-icons-sharp">home</span>
@@ -78,19 +81,23 @@ $conn->close();
                 <span class="material-icons-sharp">campaign</span>
                 <h3>Announcement</h3>
             </a>
-            <a href="Submit.php">
-                <span class="material-symbols-outlined">rate_review</span>         
-                <h3>Submit a Request or Feedback</h3>
-            </a>
+            <a href="certificates.php">
+                    <span class="material-symbols-outlined">rate_review</span>
+                    <h3>Certificates</h3>
+                </a>
+                <a href="Request.php">
+                    <span class="material-symbols-outlined">rate_review</span>         
+                    <h3>Request</h3>
+                </a>
             <a href="track.php">
                 <span class="material-symbols-outlined">query_stats</span>
                 <h3>Track</h3>
             </a>
-            <a href="Contact.html">
+            <a href="Contact.php">
                 <span class="material-symbols-outlined">call</span>
                 <h3>Contact Us</h3>
             </a>
-            <a href="About.html">
+            <a href="About.php">
                 <span class="material-symbols-outlined">info</span>
                 <h3>About Us</h3>
             </a>
@@ -115,13 +122,28 @@ $conn->close();
         <!-- User Profile Form -->
         <form action="php/user_update_profile.php" method="POST">
             <div class="profile-section">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" value="<?php echo $id; ?>" readonly required>
+            </div>
+
+            <div class="profile-section">
+                <label for="api_id">API ID:</label>
+                <input type="text" id="api_id" name="api_id" value="<?php echo $api_id; ?>" readonly required>
+            </div>
+
+            <div class="profile-section">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" value="<?php echo $username; ?>" required>
+                <input type="text" id="username" name="username" value="<?php echo $username; ?>" readonly required>
             </div>
 
             <div class="profile-section">
                 <label for="firstname">First Name:</label>
                 <input type="text" id="firstname" name="firstname" value="<?php echo $firstname; ?>" required>
+            </div>
+
+            <div class="profile-section">
+                <label for="middlename">Middle Name:</label>
+                <input type="text" id="middlename" name="middlename" value="<?php echo $middlename; ?>" required>
             </div>
 
             <div class="profile-section">
@@ -134,6 +156,11 @@ $conn->close();
                 <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
             </div>
 
+            <div class="profile-section">
+                <label for="areaofcencusstreet">Area of Census Street:</label>
+                <input type="text" id="areaofcencusstreet" name="areaofcencusstreet" value="<?php echo $areaofcencusstreet; ?>" required>
+            </div>
+
             <div class="profile-section password-container">
                 <label for="current_password">Current Password:</label>
                 <input type="password" id="current_password" name="current_password" required>
@@ -142,7 +169,9 @@ $conn->close();
 
             <div class="profile-section password-container">
                 <label for="new_password">New Password:</label>
-                <input type="password" id="new_password" name="new_password">
+                <input type="password" id="new_password" name="new_password" 
+                    pattern="(?=.*\d).{8,}" 
+                    title="Password must be at least 8 characters long and include at least 1 number">
                 <button type="button" class="btn-show" onclick="togglePasswordVisibility('new_password')">Show</button>
             </div>
 
@@ -152,13 +181,25 @@ $conn->close();
                 </div>
             </div>
         </form>
-        </div>
+    </div>
 
     <nav class="navigation">
-        <button id="theme-toggle" class="btn-theme-toggle">
-            <span class="material-symbols-outlined">light_mode</span>
-        </button>
-        <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+        <!-- Left section: Close button and Logo -->
+        <div class="left-section">
+            <div class="close" id="toggle-btn" tabindex="0" aria-label="Toggle menu">
+                <span class="material-icons-sharp">menu_open</span>
+            </div>
+            <div class="logo">
+                <img src="../images/crfms.png" alt="LGU Logo">
+            </div>
+        </div>
+        <!-- Right section: Theme toggle and Sign up button -->
+        <div class="right-section">
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle theme">
+                <span class="material-symbols-outlined">light_mode</span>
+            </button>
+            <button class="btnLogin-popup"><a href="php/logout.php">Logout</a></button>
+        </div>
     </nav>
 
     <!-- Incorrect Password Popup -->
@@ -180,8 +221,6 @@ $conn->close();
     </div>
 </div>
 
-
-        <!-- toggle password -->
 <script>
 function togglePasswordVisibility(fieldId, btn) {
     const passwordField = document.getElementById(fieldId);
@@ -194,6 +233,8 @@ function togglePasswordVisibility(fieldId, btn) {
     }
 }
 </script>
-<script src="../script.js"></script>
+<script src="../scriptv4.js"></script>
+<script src="../sidebar.js"></script>
+<script sr="../password.js"></script>
 </body>
 </html>

@@ -96,77 +96,30 @@ b {
     position: relative;
 }
 
-/* Sidebar styles */
+/* Sidebar and Layout */
 aside {
     height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
     transition: all 0.3s ease;
-    position: sticky;  /* Makes the sidebar stick to the screen */
-    top: 0;  /* Ensure it sticks at the top of the viewport */
+    z-index: 9;
 }
 
-aside.minimized {
-    width: 4rem; 
-}
-
-aside.minimized  h2, 
-aside.minimized .sidebar h3 {
-    display: none; 
-}
-aside.minimized .logo img {
-    width: 50px; /* Smaller size when sidebar is minimized */
-    height: auto;
-    object-fit: contain;
-}
-
-aside.minimized .sidebar a {
-    margin-left: 0; 
-    justify-content: center; 
-    padding-left: 0;
-}
-
-aside.minimized .sidebar a span {
-    font-size: 2rem; 
-}
-
-aside .toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1.4rem;
-}
-
-aside .toggle .logo {
-    display: flex;
-    gap: 0.5rem;
-}
-
-aside .logo img {
-    width: 10rem; 
-    height: auto; 
-    object-fit: contain;
-}
-aside.toggle .logo img {
-    width: 100px;
-    height: auto;
-    object-fit: contain;
-}
-
-aside .toggle .close {
-    cursor: pointer; 
-    color: var(--color-text);
+aside.active {
+    left: 0;
 }
 
 
 aside .sidebar {
     display: flex;
-    width: 100%;
     flex-direction: column;
     background-color: var(--color-background);
     box-shadow: var(--box-shadow);
     border-radius: 10px;
     height: 88vh;
-    transition: all 0.3s ease;
-    /* Removed position relative and top, since position sticky handles this */
+    padding-top: 20px;
 }
 
 aside .sidebar a {
@@ -212,8 +165,6 @@ aside .sidebar a:hover {
 aside .sidebar a:hover span {
     margin-left: 0.6rem;
 }
-
-
 
 /* Footer */
 
@@ -459,17 +410,53 @@ footer {
 }
 
 
-
-
-/* Navigation */
 .navigation {
     position: absolute;
-    top: 25px;
-    right: 16px;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between; /* Space between left and right sections */
+    align-items: center;
+    font-size: 18px;
+    background-color: var(--color-background-lighter);
+    box-shadow: #080917;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+/* Left section: Close button and Logo */
+.navigation .left-section {
     display: flex;
     align-items: center;
-    gap: 16px; 
-    font-size: 18px;
+    justify-content: flex-start; /* Ensures the left section is aligned to the left */
+}
+
+.navigation .close {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+/* Logo next to Close button */
+.navigation .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 16px; /* Space between the close button and the logo */
+}
+
+.navigation .logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* Right section: Theme toggle and Sign-up button */
+.navigation .right-section {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Space between theme toggle and sign-up button */
 }
 
 .navigation .btn-theme-toggle {
@@ -509,7 +496,6 @@ footer {
     background: var(--color-dark-variant);
     color: #141db8;
 }
-
 /* Modes */
 
 .btn-theme-toggle {
@@ -546,7 +532,7 @@ body.dark-mode {
 }
 
 .dark-mode a {
-    color: var(--color-text);
+    color: var(--color-primary);
 }
 
 .dark-mode .material-icons-sharp {
@@ -582,6 +568,10 @@ body.dark-mode {
 
 .dark-mode .card .material-symbols-outlined {
     color: var(--color-text);
+}
+
+.dark-mode .navigation{
+    background-color: var(--color-dark);
 }
 
 /* Popup styling */
@@ -749,13 +739,24 @@ body.dark-mode {
     justify-content: space-between;
 }
 
-/* dashboard */
 .main--content {
-    position: grid;
+    margin-left: 220px;
+    margin-top: 70px;
+    padding: 1rem; 
+    position: relative; 
     background: var(--color-background);
-    width: 100%;
-    padding: 1rem;
+    width: calc(100% - 220px);
 }
+.main--content {
+    margin-left: 0; /* Initially, no margin */
+    margin-top: 70px;
+    padding: 1rem;
+    position: relative;
+    background: var(--color-background);
+    width: 100%; /* Initially takes up full width */
+    transition: all 0.3s ease; /* Smooth transition for when sidebar toggles */
+}
+
 
 /* Header wrapper */
 .header--wrapper {
@@ -787,6 +788,7 @@ body.dark-mode {
     display: flex; /* Added flex display */
     flex-direction: column; /* Stacks elements */
     justify-content: space-between; /* Space out content */
+    cursor: pointer;
 }
 
 /* Card content */
@@ -1329,6 +1331,21 @@ color: var(--color-text);
     background-color: var(--color-secondary);
   }
 
+.backtotrack a {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .backtotrack a:hover {
+    background-color: var(--color-secondary);
+  }
   
   .updaterequeststatus button {
     background-color: var(--color-primary);
@@ -1353,38 +1370,6 @@ color: var(--color-text);
     margin-top: 1rem;
     margin-right: 3rem;
 }
-
-  /* Modal Styles */
-.modal {
-    display: none; /* Ensure the modal is hidden initially */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    display: flex; /* Use flexbox for centering */
-}
-
-.modal-content {
-    max-width: 90%; /* Make sure it doesn't overflow */
-    max-height: 90%; /* Make sure it doesn't overflow */
-}
-
-.close {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 
 .contact-info h2, .about-container h1, .about-content h2 {
       color: var(--color-header);
@@ -1614,4 +1599,179 @@ color: var(--color-text);
 
 .material-symbols-outlined {
     font-size: 24px;
+}
+
+.admin-message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.admin-message-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#admin_message {
+    width: 80%;
+    max-width: 600px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center; /* Center text inside the text area */
+}
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    /* Ensure that the container has a column layout for mobile */
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+
+    /* Sidebar positioning for mobile */
+    #sidebar {
+        width: 100%; /* Make the sidebar full width in mobile */
+        position: fixed;
+        top: 60px; /* Sidebar starts below the navigation bar */
+        left: 0;
+        padding: 10px;
+        display: none;
+        z-index: 900;
+        background-color: rgba(0, 0, 0, 0.8); /* Optional: Add a transparent background */
+        height: 100%; /* Make the sidebar full height */
+        overflow-y: auto; /* Allow scrolling inside the sidebar */
+    }
+
+    /* When sidebar is active, it will display */
+    #sidebar.active {
+        display: block;
+    }
+
+    .main--content {
+        padding-top: 60px; 
+        display: block; 
+    }
+
+    /* Navigation Bar stays fixed at the top */
+    .navigation.active {
+        margin-left: 0; /* Do not push the navigation bar */
+    }
+
+    aside.active + .main--content {
+        margin-left: 0; /* Do not push the main content */
+        width: 100%; /* Full width for content */
+    }
+
+    .left-section {
+        flex: 1;
+    }
+
+    .logo img {
+        height: 30px;
+    }
+
+    .right-section {
+        display: none;
+    }
+
+    #toggle-btn {
+        display: block;
+        cursor: pointer;
+    }
+
+    /* Sidebar toggle button icon */
+    #toggle-btn span {
+        font-size: 30px;
+        color: white;
+    }
+
+    /* Sidebar overlay for mobile */
+    #sidebar.active {
+        display: block;
+        top: 60px; /* Sidebar starts directly under the navbar */
+        z-index: 900;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .navigation.active {
+        margin-left: 250px;
+        transition: margin-left 0.3s ease;
+    }
+
+    /* When the sidebar is active (opened), push the content to the right */
+    aside.active + .main--content {
+        margin-left: 220px; /* Push content over */
+        width: calc(100% - 220px); /* Reduce content width */
+    }
+}
+/* Responsive Table Styling for Mobile */
+@media screen and (max-width: 768px) {
+    .user-list-section {
+        overflow-x: auto; /* Enables horizontal scrolling if necessary */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+        width: 100%; /* Ensures container fills the viewport width */
+    }
+
+    .user-list-section table {
+        width: 100%; /* Make table occupy full width of the container */
+        border-collapse: collapse;
+        table-layout: fixed; /* Ensures equal column width distribution */
+    }
+
+    .user-list-section th, .user-list-section td {
+        padding: 8px;
+        white-space: nowrap; /* Prevents text wrapping within cells */
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Adds ellipsis if text overflows */
+    }
+}
+
+/*Integration additions/revisions */
+
+.certificate-container {
+    position: relative; 
+    padding: 20px; 
+}
+
+.close-view-btn {
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    background: var(--color-secondary); 
+    color: var(--color-white); 
+    font-size: 1.2rem; 
+    cursor: pointer; 
+    border-radius: 50%; 
+    width: 40px; 
+    height: 40px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 10;
+}
+
+#location-suggestions {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+    width: calc(100% - 20px);
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
 }

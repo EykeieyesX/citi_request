@@ -2,15 +2,19 @@
 session_start();
 
 $servername = "localhost";
-$username = "root"; 
-$password = ""; 
-$dbname = "lgutestdb";
+$username = "citi_lgutestdb1";
+$password = "GGpfr89ly9h6qJF7";
+$dbname = "citi_lgutestdb";
 
+// Connect to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// Predefined admin code for validation
+$predefinedAdminCode = "adminCRFMScode";
 
 // User input from registration form
 $username = $_POST["username"];
@@ -20,12 +24,9 @@ $barangay = $_POST["barangay"];
 $password = $_POST["password"];
 $adminCode = $_POST["admin_code"];
 
-// Predefined admin code
-$predefinedAdminCode = "admincode101"; // Hardcoded admin code
-
-// Check if the provided admin code matches the predefined admin code
+// Check if the admin code matches the predefined code
 if ($adminCode !== $predefinedAdminCode) {
-    header("Location: AdminLogin.html?error=invalid_admin_code");
+    header("Location: ../AdminLogin.html?error=invalid_admin_code");
     exit();
 }
 
@@ -36,9 +37,10 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    header("Location: AdminLogin.html?error=username_taken");
+    header("Location: ../AdminLogin.html?error=username_taken");
     exit();
 }
+
 // Hash the password for security
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -47,9 +49,9 @@ $stmt = $conn->prepare("INSERT INTO admincredentials (username, firstname, lastn
 $stmt->bind_param("sssss", $username, $firstname, $lastname, $barangay, $hashedPassword);
 
 if ($stmt->execute()) {
-    header("Location: AdminLogin.html?adminsuccess=registered"); 
+    header("Location: ../AdminLogin.html?adminsuccess=registered"); 
     exit();
-} {
+} else {
     echo "Error: " . $stmt->error;
 }
 
